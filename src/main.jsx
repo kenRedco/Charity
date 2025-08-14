@@ -21,7 +21,8 @@ AOS.init({
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Router>
+    {/* 👇 IMPORTANT for GitHub Pages project sites */}
+    <Router basename="/Charity">
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
