@@ -32,7 +32,7 @@ export default function App() {
     e.preventDefault();
     setNewsletterStatus('submitting');
     const serviceID = 'service_3e587ll';
-    const templateID = 'template_ka8678b';
+    const templateID = 'template_92u6w3h';
     const publicKey = 'P8nAMYp6uXMDnOwBB';
     const templateParams = { newsletter_email: newsletterEmail };
 
