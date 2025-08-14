@@ -110,102 +110,101 @@ export default function Home() {
       </section>
 
       {/* --- Impact Overview Section --- */}
-<section className="py-24 bg-white" id="impact-overview">
-  <div className="max-w-6xl mx-auto px-6">
-    {/* Headline + intro */}
-    <div className="text-center">
-      <h2
-        className="text-4xl font-extrabold text-gray-900 mb-4"
-        data-aos="fade-up"
-      >
-        From Code to Concrete Change
-      </h2>
-      <p
-        className="text-lg text-gray-700 max-w-3xl mx-auto mb-12"
-        data-aos="fade-up"
-        data-aos-delay="100"
-      >
-        See how direct crypto donations empower families to build their own
-        futures. Hover over the photo to learn more about this story.
-      </p>
-    </div>
-
-    {/* Media + copy */}
-    <div className="grid md:grid-cols-2 gap-8 items-center">
-      {/* Image with hover overlay */}
-      <div
-        className="group relative rounded-2xl overflow-hidden shadow-xl"
-        data-aos="fade-right"
-      >
-        <img
-          src={impactStoryImage}
-          alt="A mother and her two young sons smiling together"
-          className="w-full h-full object-cover max-h-[420px] motion-safe:transition-transform motion-safe:duration-700 group-hover:scale-[1.03]"
-          loading="lazy"
-        />
-
-        {/* Gradient overlay */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 motion-safe:transition-opacity duration-300" />
-
-        {/* Hover text reveal */}
-        <div className="absolute inset-x-0 bottom-0 p-5">
-          <div className="translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 motion-safe:transition-all duration-500">
-            <span className="inline-block text-xs font-semibold tracking-wide uppercase text-white/90">
-              East Africa
-            </span>
-            <h3 className="mt-1 text-white text-lg font-bold drop-shadow">
-              A mother invests in her family’s future
-            </h3>
-            <p className="mt-1 text-white/90 text-sm line-clamp-3">
-              A single transfer helped this family cover school fees and set
-              aside savings—turning short-term relief into long-term stability.
+      <section className="py-24 bg-white" id="impact-overview">
+        <div className="max-w-6xl mx-auto px-6">
+          {/* Headline + intro */}
+          <div className="text-center">
+            <h2
+              className="text-4xl font-extrabold text-gray-900 mb-4"
+              data-aos="fade-up"
+            >
+              From Code to Concrete Change
+            </h2>
+            <p
+              className="text-lg text-gray-700 max-w-3xl mx-auto mb-12"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              See how direct crypto donations empower families to build their own
+              futures. Hover over the photo to learn more about this story.
             </p>
           </div>
-        </div>
-      </div>
 
-      {/* Text card */}
-      <div
-        className="bg-gray-50 p-8 rounded-2xl shadow-sm flex flex-col justify-between"
-        data-aos="fade-left"
-        data-aos-delay="100"
-      >
-        <div>
-          <blockquote className="text-xl italic text-gray-800 mb-4 leading-relaxed">
-            “It wasn’t a handout. It was a seed. We invested, and now we can
-            plan ahead.”
-          </blockquote>
-          <p className="text-gray-600">
-            Direct giving respects choice. Funds arrive quickly via mobile
-            money, letting families invest in what matters most—food, school,
-            tools, or savings. Your donation moves with radical transparency
-            on-chain and minimal overhead.
-          </p>
-        </div>
-
-        {/* Stylish CTA */}
-        <div className="mt-8 text-center md:text-left">
-          <a
-            href="/impact"
-            className="inline-flex items-center px-6 py-3 rounded-full bg-green-600 text-white font-semibold shadow-lg hover:bg-green-700 hover:shadow-xl motion-safe:transition-all duration-300"
-          >
-            Explore More Impact Stories
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 ml-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          {/* Media + copy */}
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            {/* Image with hover overlay */}
+            <div
+              className="group relative rounded-2xl overflow-hidden shadow-xl"
+              data-aos="fade-right"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+              <img
+                src={impactStoryImage}
+                alt="A mother and her two young sons smiling together"
+                className="w-full h-full object-cover max-h-[420px] motion-safe:transition-transform motion-safe:duration-700 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
 
+              {/* Gradient overlay */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 motion-safe:transition-opacity duration-300" />
+
+              {/* Hover text reveal */}
+              <div className="absolute inset-x-0 bottom-0 p-5">
+                <div className="translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 motion-safe:transition-all duration-500">
+                  <span className="inline-block text-xs font-semibold tracking-wide uppercase text-white/90">
+                    East Africa
+                  </span>
+                  <h3 className="mt-1 text-white text-lg font-bold drop-shadow">
+                    A mother invests in her family’s future
+                  </h3>
+                  <p className="mt-1 text-white/90 text-sm line-clamp-3">
+                    A single transfer helped this family cover school fees and set
+                    aside savings—turning short-term relief into long-term stability.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Text card */}
+            <div
+              className="bg-gray-50 p-8 rounded-2xl shadow-sm flex flex-col justify-between"
+              data-aos="fade-left"
+              data-aos-delay="100"
+            >
+              <div>
+                <blockquote className="text-xl italic text-gray-800 mb-4 leading-relaxed">
+                  “It wasn’t a handout. It was a seed. We invested, and now we can
+                  plan ahead.”
+                </blockquote>
+                <p className="text-gray-600">
+                  Direct giving respects choice. Funds arrive quickly via mobile
+                  money, letting families invest in what matters most—food, school,
+                  tools, or savings. Your donation moves with radical transparency
+                  on-chain and minimal overhead.
+                </p>
+              </div>
+
+              {/* Stylish CTA */}
+              <div className="mt-8 text-center md:text-left">
+                <a
+                  href="/impact"
+                  className="inline-flex items-center px-6 py-3 rounded-full bg-green-600 text-white font-semibold shadow-lg hover:bg-green-700 hover:shadow-xl motion-safe:transition-all duration-300"
+                >
+                  Explore More Impact Stories
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 ml-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       
       {/* --- Globe Section --- */}
       <section className="py-24 bg-gray-900 text-white">
@@ -216,12 +215,12 @@ export default function Home() {
                Our model cuts out the middlemen. We use blockchain to create a direct pathway from you to the people who need it most, no matter where they are in the world. The result is faster, cheaper, and more transparent aid.
              </p>
           </div>
-          <div className="flex justify-center items-center h-[400px] md:h-auto" data-aos="fade-left">
+          {/* THE ONLY CHANGE IS ADDING "pointer-events-none" TO THE LINE BELOW */}
+          <div className="flex justify-center items-center h-[400px] md:h-auto pointer-events-none" data-aos="fade-left">
              <World />
           </div>
         </div>
       </section>
-
 
     </div>
   );

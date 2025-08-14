@@ -31,9 +31,9 @@ export default function App() {
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
     setNewsletterStatus('submitting');
-    const serviceID = 'YOUR_SERVICE_ID';
-    const templateID = 'YOUR_NEWSLETTER_TEMPLATE_ID';
-    const publicKey = 'YOUR_PUBLIC_KEY';
+    const serviceID = 'service_3e587ll';
+    const templateID = 'template_ka8678b';
+    const publicKey = 'P8nAMYp6uXMDnOwBB';
     const templateParams = { newsletter_email: newsletterEmail };
 
     emailjs.send(serviceID, templateID, templateParams, publicKey)
