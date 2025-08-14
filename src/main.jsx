@@ -2,9 +2,10 @@ import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App';
+import ScrollToTop from './components/ScrollToTop'; // <-- 1. IMPORT THE NEW COMPONENT
 import './index.css';
 
-import 'aos/dist/aos.css';
+import 'aos/dist/aos.css';  
 import AOS from 'aos';
 
 // --- Lazy Load all page components for performance ---
@@ -21,7 +22,6 @@ AOS.init({
   once: true,
 });
 
-// A loading spinner to show while pages are being fetched
 const LoadingFallback = () => (
   <div className="w-full h-screen flex justify-center items-center">
     <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-green-600"></div>
@@ -30,8 +30,8 @@ const LoadingFallback = () => (
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/* This basename is crucial for deploying to a subdirectory on GitHub Pages */}
     <Router basename="/Charity">
+      <ScrollToTop /> {/* <-- 2. ADD THE COMPONENT HERE */}
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route path="/" element={<App />}>
