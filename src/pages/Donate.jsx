@@ -96,11 +96,13 @@ export default function Donate() {
                 <div className="col-span-1">
                   <div className="p-1 bg-white rounded-lg shadow-md aspect-square flex items-center justify-center">
                     <ClientOnly fallback={<div className="w-full h-full bg-gray-100 rounded animate-pulse" />}>
-                      <QRCode
-                        value={qrCodeValue}
-                        size={256}
-                        style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
-                      />
+                      {() => (
+                        <QRCode
+                          value={qrCodeValue}
+                          size={256}
+                          style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
+                        />
+                      )}
                     </ClientOnly>
                   </div>
                 </div>

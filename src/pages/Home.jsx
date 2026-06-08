@@ -217,9 +217,11 @@ export default function Home() {
           </div>
           <div className="flex justify-center items-center h-[400px] md:h-auto pointer-events-none" data-aos="fade-left">
             <ClientOnly fallback={<div className="h-[400px] w-full" aria-hidden="true" />}>
-              <Suspense fallback={<div className="h-[400px] w-full" aria-hidden="true" />}>
-                <GlobeSection />
-              </Suspense>
+              {() => (
+                <Suspense fallback={<div className="h-[400px] w-full" aria-hidden="true" />}>
+                  <GlobeSection />
+                </Suspense>
+              )}
             </ClientOnly>
           </div>
         </div>
