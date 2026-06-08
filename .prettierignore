@@ -1,0 +1,4 @@
+dist
+node_modules
+.vite-react-ssg-temp
+public/earth-night.jpg
