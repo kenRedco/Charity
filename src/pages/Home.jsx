@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { ClientOnly } from 'vite-react-ssg';
 import usePageTitle from "../hooks/usePageTitle";
+import useCountUp from "../hooks/useCountUp";
 import PageMeta from "../components/PageMeta";
 import impactStoryImage from "../assets/storyMotherChildren.png";
 
@@ -15,11 +16,24 @@ const GlobeSection = lazy(() => import('../components/GlobeSection'));
 
 // --- Data for the page ---
 const impactStats = [
-  { icon: FiUsers, value: "10,000+", label: "Families Supported" },
-  { icon: FiTrendingUp, value: "$12M+", label: "Delivered Directly" },
-  { icon: FiTarget, value: "91%", label: "Goes to Recipients" },
-  { icon: FiGlobe, value: "4", label: "Countries Reached" },
+  { icon: FiUsers, numericEnd: 10000, prefix: '', suffix: '+', label: "Families Supported" },
+  { icon: FiTrendingUp, numericEnd: 12, prefix: '$', suffix: 'M+', label: "Delivered Directly" },
+  { icon: FiTarget, numericEnd: 91, prefix: '', suffix: '%', label: "Goes to Recipients" },
+  { icon: FiGlobe, numericEnd: 4, prefix: '', suffix: '', label: "Countries Reached" },
 ];
+
+function StatCard({ icon: Icon, numericEnd, prefix, suffix, label, aosDelay }) {
+  const { ref, value } = useCountUp(numericEnd, { duration: 1800 });
+  return (
+    <div ref={ref} className="p-4" data-aos="fade-up" data-aos-delay={aosDelay}>
+      <Icon className="h-12 w-12 mx-auto mb-4 text-green-600" />
+      <h3 className="text-4xl md:text-5xl font-extrabold text-gray-800 dark:text-gray-100 mb-1" aria-label={`${prefix}${numericEnd}${suffix}`}>
+        {prefix}{value.toLocaleString()}{suffix}
+      </h3>
+      <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg font-medium">{label}</p>
+    </div>
+  );
+}
 
 const howItWorksSteps = [
   { icon: GiReceiveMoney, title: "You Donate Crypto", description: "Make a secure, low-fee donation using your preferred cryptocurrency." },
@@ -69,11 +83,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {impactStats.map((stat, index) => (
-              <div key={stat.label} className="p-4" data-aos="fade-up" data-aos-delay={index * 100}>
-                <stat.icon className="h-12 w-12 mx-auto mb-4 text-green-600" />
-                <h3 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-1">{stat.value}</h3>
-                <p className="text-gray-500 text-base md:text-lg font-medium">{stat.label}</p>
-              </div>
+              <StatCard key={stat.label} {...stat} aosDelay={index * 100} />
             ))}
           </div>
         </div>

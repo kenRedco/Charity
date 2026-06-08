@@ -51,7 +51,7 @@ export default function Donate() {
             src={donateChild}
             alt="Smiling child, symbolizing the impact of your donation"
             className="absolute h-full w-full object-cover"
-            loading="eager"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-green-800/60 flex flex-col justify-end p-12 text-white">
             <h1 className="text-5xl font-extrabold leading-tight" data-aos="fade-up">
