@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import usePageTitle from '../hooks/usePageTitle';
+import PageMeta from '../components/PageMeta';
 import { FiMail, FiMessageSquare, FiInfo, FiLoader, FiCheckCircle } from 'react-icons/fi';
 import emailjs from '@emailjs/browser';
 import { EMAILJS } from '../config';
@@ -28,7 +29,12 @@ export default function Contact() {
   };
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 dark:bg-gray-900">
+      <PageMeta
+        title="Contact CryptoCharity — Get in Touch"
+        description="Have a question, partnership proposal, or press inquiry? Contact CryptoCharity and we'll get back to you as soon as possible."
+        path="/contact"
+      />
       <section className="py-28 px-6 bg-green-700 text-center text-white"><h1 className="text-5xl font-extrabold" data-aos="fade-up">Get in Touch</h1><p className="max-w-2xl mx-auto mt-4 text-lg opacity-90" data-aos="fade-up" data-aos-delay="100">We'd love to hear from you. Whether you have a question, a suggestion, or a partnership proposal, please reach out.</p></section>
 
       <section className="py-24 px-6">

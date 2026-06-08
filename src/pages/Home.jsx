@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import usePageTitle from "../hooks/usePageTitle";
+import PageMeta from "../components/PageMeta";
 import impactStoryImage from "../assets/storyMotherChildren.png"
 
 // --- Icon & Globe Imports ---
@@ -47,9 +48,15 @@ const World = () => {
 
 export default function Home() {
   usePageTitle("Empowering Lives Through Direct Crypto Giving");
-  
+
   return (
-    <div className="bg-white text-gray-800 overflow-x-hidden">
+    <div className="bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-100 overflow-x-hidden">
+      <PageMeta
+        title="CryptoCharity — Direct Crypto Donations to Families in Need"
+        description="CryptoCharity delivers direct crypto donations to families in need. 91% of funds go directly to recipients — transparent, fast, and dignified humanitarian aid."
+        path="/"
+        includeJsonLd
+      />
       {/* --- Hero Section --- */}
       <section className="relative h-[90vh] min-h-[700px] flex items-center text-white">
         <div className="absolute inset-0">
@@ -185,9 +192,9 @@ export default function Home() {
 
               {/* Stylish CTA */}
               <div className="mt-8 text-center md:text-left">
-                <a
-                  href="/impact"
-                  className="inline-flex items-center px-6 py-3 rounded-full bg-green-600 text-white font-semibold shadow-lg hover:bg-green-700 hover:shadow-xl motion-safe:transition-all duration-300"
+                <Link
+                  to="/impact"
+                  className="inline-flex items-center px-6 py-3 rounded-full bg-primary-600 text-white font-semibold shadow-lg hover:bg-primary-700 hover:shadow-xl motion-safe:transition-all duration-300"
                 >
                   Explore More Impact Stories
                   <svg
@@ -199,7 +206,7 @@ export default function Home() {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

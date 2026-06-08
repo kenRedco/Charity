@@ -1,5 +1,6 @@
 import React from 'react';
 import usePageTitle from '../hooks/usePageTitle';
+import PageMeta from '../components/PageMeta';
 import { Link } from 'react-router-dom';
 import { FiArrowDownCircle, FiCheckSquare, FiShield, FiSend, FiUserCheck } from 'react-icons/fi';
 
@@ -35,7 +36,12 @@ export default function HowItWorks() {
   usePageTitle('How It Works');
 
   return (
-    <div className="bg-white text-gray-800">
+    <div className="bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-100">
+      <PageMeta
+        title="How It Works — The Journey of Your Crypto Donation"
+        description="Follow every step of your crypto donation: from your wallet to verified recipient families. Radical transparency via public blockchain records."
+        path="/process"
+      />
       {/* Hero Section */}
       <section className="relative py-28 px-6 bg-green-700 text-center text-white">
         <div className="absolute inset-0 bg-black/20"></div>

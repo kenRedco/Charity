@@ -1,11 +1,17 @@
 import React from 'react';
 import usePageTitle from '../hooks/usePageTitle';
+import PageMeta from '../components/PageMeta';
 
 export default function TermsOfService() {
   usePageTitle('Terms of Service');
 
   return (
-    <div className="bg-gray-50 py-20 px-6">
+    <div className="bg-gray-50 dark:bg-gray-900 py-20 px-6">
+      <PageMeta
+        title="Terms of Service"
+        description="CryptoCharity's terms of service: agreement, acceptable use, donation terms, and limitation of liability."
+        path="/terms"
+      />
       <div className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-xl shadow-lg">
         <h1 className="text-4xl font-extrabold text-gray-900 mb-6">Terms of Service</h1>
         <p className="text-sm text-gray-500 mb-8">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>

@@ -1,5 +1,6 @@
 import React from 'react';
 import usePageTitle from '../hooks/usePageTitle';
+import PageMeta from '../components/PageMeta';
 import { FiTarget, FiEye, FiZap } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +15,12 @@ export default function About() {
   usePageTitle('About Us');
 
   return (
-    <div className="bg-white text-gray-800">
+    <div className="bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-100">
+      <PageMeta
+        title="About CryptoCharity — Our Mission, Vision, and Team"
+        description="CryptoCharity believes poverty is a lack of cash, not character. Learn about our mission to deliver direct, transparent crypto donations and the team making it happen."
+        path="/about"
+      />
       {/* Hero Section */}
       <section className="relative py-28 px-6 text-white bg-green-700 text-center">
         <div className="absolute inset-0 bg-black/20"></div>

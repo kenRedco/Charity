@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import ScrollToTop from './components/ScrollToTop';
 import LoadingFallback from './components/LoadingFallback';
@@ -26,6 +27,7 @@ AOS.init({
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <HelmetProvider>
     <Router basename="/Charity">
       <ScrollToTop />
       <Suspense fallback={<LoadingFallback />}>
@@ -43,5 +45,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </Routes>
       </Suspense>
     </Router>
+    </HelmetProvider>
   </React.StrictMode>
 );

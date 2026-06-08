@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import usePageTitle from '../hooks/usePageTitle';
+import PageMeta from '../components/PageMeta';
 import QRCode from 'react-qr-code';
 import { FiCopy, FiCheckCircle, FiHelpCircle, FiAlertTriangle } from 'react-icons/fi';
 import { SiBinance, SiCoinbase } from 'react-icons/si';
@@ -34,7 +35,12 @@ export default function Donate() {
   }`;
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 dark:bg-gray-900">
+      <PageMeta
+        title="Donate Crypto — Give Directly to Families in Need"
+        description="Donate cryptocurrency directly to families living in poverty. Scan the QR code or copy the wallet address. 91% of every donation reaches recipients."
+        path="/donate"
+      />
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 min-h-screen">
 
         {/* Left Side - Image & Mission */}

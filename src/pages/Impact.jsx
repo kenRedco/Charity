@@ -1,6 +1,6 @@
-// src/pages/Impact.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import PageMeta from "../components/PageMeta";
 
 // ---- Local image imports (place these files under src/assets/...) ----
 import storyCashExchange from "../assets/storyCashExchange.png";
@@ -146,7 +146,12 @@ const StoryCard = ({ s, index }) => (
 ------------------------------------------------------------ */
 export default function Impact() {
   return (
-    <div className="bg-white text-gray-800">
+    <div className="bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-100">
+      <PageMeta
+        title="Real Impact Stories — Families Empowered by Crypto Donations"
+        description="See how direct crypto donations transform lives. Real stories from East and West Africa: micro-businesses started, school fees paid, and futures secured."
+        path="/impact"
+      />
   {/* Header */}
   <section className="relative py-28 px-6 text-white bg-green-700 text-center">
   <div className="absolute inset-0 bg-black/20"></div>

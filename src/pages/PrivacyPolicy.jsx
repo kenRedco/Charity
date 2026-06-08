@@ -1,11 +1,17 @@
 import React from 'react';
 import usePageTitle from '../hooks/usePageTitle';
+import PageMeta from '../components/PageMeta';
 
 export default function PrivacyPolicy() {
   usePageTitle('Privacy Policy');
 
   return (
-    <div className="bg-gray-50 py-20 px-6">
+    <div className="bg-gray-50 dark:bg-gray-900 py-20 px-6">
+      <PageMeta
+        title="Privacy Policy"
+        description="CryptoCharity's privacy policy: what information we collect, how we use it, and your rights."
+        path="/privacy"
+      />
       <div className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-xl shadow-lg">
         <h1 className="text-4xl font-extrabold text-gray-900 mb-6">Privacy Policy</h1>
         <p className="text-sm text-gray-500 mb-8">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
