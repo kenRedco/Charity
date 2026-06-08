@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import usePageTitle from '../hooks/usePageTitle';
 import QRCode from 'react-qr-code';
-import { FiCopy, FiCheckCircle, FiHelpCircle } from 'react-icons/fi';
+import { FiCopy, FiCheckCircle, FiHelpCircle, FiAlertTriangle } from 'react-icons/fi';
 import { SiBinance, SiCoinbase } from 'react-icons/si';
 import { FaWallet } from 'react-icons/fa';
 import LiveDonationFeed from '../components/LiveDonationFeed';
-
-// ⬇️ NEW: local image import from src/assets
 import donateChild from '../assets/donateChild.png';
+import { DONATION_WALLET } from '../config';
 
-const mainWallet = {
-  address: '0xb543c83D838eCbca569a3D9F76B5f446369A1234', // Example Address
-  chainId: 1, // 1 is Ethereum Mainnet
-};
+/** Convert an ETH string to a wei integer string for EIP-681 URIs.
+ *  value= in the ethereum: URI spec is denominated in wei, not ETH. */
+function ethToWei(ethStr) {
+  const parsed = parseFloat(ethStr);
+  if (!ethStr || isNaN(parsed) || parsed <= 0) return '';
+  return BigInt(Math.round(parsed * 1e18)).toString();
+}
 
 export default function Donate() {
   usePageTitle('Donate Now');
@@ -20,14 +22,15 @@ export default function Donate() {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(mainWallet.address);
+    navigator.clipboard.writeText(DONATION_WALLET.address);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // QR code value with Chain ID
-  const qrCodeValue = `ethereum:${mainWallet.address}@${mainWallet.chainId}${
-    amount ? `?value=${amount}` : ''
+  // EIP-681 URI — value must be in wei, not ETH
+  const amountWei = ethToWei(amount);
+  const qrCodeValue = `ethereum:${DONATION_WALLET.address}@${DONATION_WALLET.chainId}${
+    amountWei ? `?value=${amountWei}` : ''
   }`;
 
   return (
@@ -57,6 +60,18 @@ export default function Donate() {
         {/* Right Side - Donation UI */}
         <div className="py-16 px-6 sm:px-12 lg:px-16">
           <div className="max-w-lg mx-auto lg:mx-0">
+            {/* ⚠️ Remove this banner once the real wallet address is set in src/config.js */}
+            {DONATION_WALLET.address === '0xb543c83D838eCbca569a3D9F76B5f446369A1234' && (
+              <div className="mb-6 flex items-start gap-3 bg-yellow-50 border border-yellow-300 text-yellow-800 p-4 rounded-xl">
+                <FiAlertTriangle className="h-5 w-5 mt-0.5 flex-shrink-0 text-yellow-600" />
+                <p className="text-sm font-medium">
+                  <strong>Demo mode:</strong> The wallet address shown is a placeholder. Replace{' '}
+                  <code className="font-mono bg-yellow-100 px-1 rounded">DONATION_WALLET.address</code> in{' '}
+                  <code className="font-mono bg-yellow-100 px-1 rounded">src/config.js</code> before accepting real donations.
+                </p>
+              </div>
+            )}
+
             <h2 className="text-4xl font-extrabold text-gray-900 mb-2">Choose Your Donation Method</h2>
             <p className="text-lg text-gray-600 mb-8">We support all major wallets and exchanges.</p>
 
@@ -115,13 +130,14 @@ export default function Donate() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">Copy this Wallet Address</label>
                 <div className="relative">
                   <code className="block break-words bg-gray-100 text-gray-700 p-3 rounded-md text-sm font-mono pr-12">
-                    {mainWallet.address}
+                    {DONATION_WALLET.address}
                   </code>
                   <button
                     onClick={handleCopy}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-500 hover:text-green-600"
+                    aria-label={copied ? 'Address copied' : 'Copy wallet address'}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-500 hover:text-primary-600"
                   >
-                    {copied ? <FiCheckCircle className="text-green-600" /> : <FiCopy />}
+                    {copied ? <FiCheckCircle className="text-primary-600" /> : <FiCopy />}
                   </button>
                 </div>
               </div>

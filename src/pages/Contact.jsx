@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import usePageTitle from '../hooks/usePageTitle';
 import { FiMail, FiMessageSquare, FiInfo, FiLoader, FiCheckCircle } from 'react-icons/fi';
 import emailjs from '@emailjs/browser';
+import { EMAILJS } from '../config';
 
 export default function Contact() {
   usePageTitle('Contact Us');
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // null, 'success', or 'error'
 
@@ -14,12 +15,7 @@ export default function Contact() {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // --- Replace these with your actual EmailJS credentials! ---
-    const serviceID = 'service_3e587ll';
-    const templateID = 'template_ka8678b';
-    const publicKey = 'P8nAMYp6uXMDnOwBB';
-
-    emailjs.sendForm(serviceID, templateID, e.target, publicKey)
+    emailjs.sendForm(EMAILJS.serviceId, EMAILJS.contactTemplateId, e.target, EMAILJS.publicKey)
       .then((result) => {
           setSubmitStatus('success');
           e.target.reset();
