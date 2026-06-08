@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ClientOnly } from 'vite-react-ssg';
 import usePageTitle from '../hooks/usePageTitle';
 import PageMeta from '../components/PageMeta';
 import QRCode from 'react-qr-code';
@@ -94,11 +95,13 @@ export default function Donate() {
               <div className="grid grid-cols-3 gap-6">
                 <div className="col-span-1">
                   <div className="p-1 bg-white rounded-lg shadow-md aspect-square flex items-center justify-center">
-                    <QRCode
-                      value={qrCodeValue}
-                      size={256}
-                      style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
-                    />
+                    <ClientOnly fallback={<div className="w-full h-full bg-gray-100 rounded animate-pulse" />}>
+                      <QRCode
+                        value={qrCodeValue}
+                        size={256}
+                        style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
+                      />
+                    </ClientOnly>
                   </div>
                 </div>
                 <div className="col-span-2">

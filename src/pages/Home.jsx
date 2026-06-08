@@ -1,15 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
+import { ClientOnly } from 'vite-react-ssg';
 import usePageTitle from "../hooks/usePageTitle";
 import PageMeta from "../components/PageMeta";
-import impactStoryImage from "../assets/storyMotherChildren.png"
+import impactStoryImage from "../assets/storyMotherChildren.png";
 
-// --- Icon & Globe Imports ---
-import Globe from 'react-globe.gl';
-import { FaTwitter, FaLinkedinIn, FaFacebookF, FaInstagram } from 'react-icons/fa';
-import { FiUsers, FiTrendingUp, FiTarget, FiGlobe, FiChevronRight } from 'react-icons/fi';
+// Icons
+import { FiUsers, FiTrendingUp, FiTarget, FiGlobe } from 'react-icons/fi';
 import { GiReceiveMoney, GiChoice } from 'react-icons/gi';
 import { IoIosGitNetwork } from 'react-icons/io';
+
+// Globe is a heavy three.js dependency — load lazily, render client-only
+const GlobeSection = lazy(() => import('../components/GlobeSection'));
 
 // --- Data for the page ---
 const impactStats = [
@@ -24,26 +26,6 @@ const howItWorksSteps = [
   { icon: IoIosGitNetwork, title: "We Send It Directly", description: "Funds are delivered straight to the mobile money accounts of families in poverty." },
   { icon: GiChoice, title: "They Choose Their Future", description: "Recipients use funds for what they need most—a business, school, or medicine." }
 ];
-
-// --- Globe Component ---
-const World = () => {
-    const globeEl = useRef();
-    const arcsData = [
-        { startLat: 34.0522, startLng: -118.2437, endLat: -1.9403, endLng: 29.8739, color: 'rgba(255, 255, 255, 0.6)'},
-        { startLat: 40.7128, startLng: -74.0060, endLat: 0.3476, endLng: 32.5825, color: 'rgba(255, 255, 255, 0.6)'},
-        { startLat: 51.5072, startLng: -0.1276, endLat: -6.1751, endLng: 106.8650, color: 'rgba(255, 255, 255, 0.6)'}
-    ];
-
-    useEffect(() => {
-        if (globeEl.current) {
-            globeEl.current.controls().autoRotate = true;
-            globeEl.current.controls().autoRotateSpeed = 0.4;
-            globeEl.current.controls().enableZoom = false;
-        }
-    }, []);
-
-    return <Globe ref={globeEl} globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg" atmosphereColor="#059669" atmosphereAltitude={0.2} arcsData={arcsData} arcColor={'color'} arcDashLength={() => Math.random()} arcDashGap={() => Math.random()} arcDashAnimateTime={() => Math.random() * 4000 + 500} arcStroke={0.5} arcsTransitionDuration={0} width={600} height={600} backgroundColor="rgba(0,0,0,0)" />;
-};
 
 
 export default function Home() {
@@ -222,9 +204,12 @@ export default function Home() {
                Our model cuts out the middlemen. We use blockchain to create a direct pathway from you to the people who need it most, no matter where they are in the world. The result is faster, cheaper, and more transparent aid.
              </p>
           </div>
-          {/* THE ONLY CHANGE IS ADDING "pointer-events-none" TO THE LINE BELOW */}
           <div className="flex justify-center items-center h-[400px] md:h-auto pointer-events-none" data-aos="fade-left">
-             <World />
+            <ClientOnly fallback={<div className="h-[400px] w-full" aria-hidden="true" />}>
+              <Suspense fallback={<div className="h-[400px] w-full" aria-hidden="true" />}>
+                <GlobeSection />
+              </Suspense>
+            </ClientOnly>
           </div>
         </div>
       </section>

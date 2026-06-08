@@ -18,7 +18,7 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(
-    () => window.matchMedia('(prefers-color-scheme: dark)').matches
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
   );
 
   // Apply dark class to <html>
