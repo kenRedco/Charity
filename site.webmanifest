@@ -1,0 +1,18 @@
+{
+  "name": "CryptoCharity",
+  "short_name": "CryptoCharity",
+  "description": "Direct Crypto Donations to Families in Need",
+  "start_url": "/Charity/",
+  "scope": "/Charity/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#059669",
+  "icons": [
+    {
+      "src": "/Charity/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
