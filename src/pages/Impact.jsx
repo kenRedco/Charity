@@ -2,19 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import PageMeta from "../components/PageMeta";
 
-// ---- Local image imports (place these files under src/assets/...) ----
-import storyCashExchange from "../assets/storyCashExchange.png";
-import storyManPhoneCash from "../assets/storyManPhoneCash.png";
-import storyBananaHead from "../assets/storyBananaHead.png";
-import storyVendorSquare from "../assets/storyVendorSquare.png";
+// Story images — free-to-use photos from Unsplash
+const IMG_STORY_ADAH    = 'https://images.unsplash.com/photo-1778079247396-9c0e01c83c8b?q=80&w=800&auto=format&fit=crop';
+const IMG_STORY_KASSIM  = 'https://images.unsplash.com/photo-1540302819037-abacaf0f1e1e?q=80&w=800&auto=format&fit=crop';
+const IMG_STORY_AMINA   = 'https://images.unsplash.com/photo-1761370980657-22586ea44093?q=80&w=800&auto=format&fit=crop';
+const IMG_VENDOR_SECTION = 'https://images.unsplash.com/photo-1760726744447-97f9d190a701?q=80&w=1200&auto=format&fit=crop';
 
-// (Optional) If you have a placeholder image, import and use it in onImgError.
-// import placeholder from "../assets/images/placeholder.jpg";
-
-// Fallback so broken/missing images won't break layout
+// Fallback for broken images
 const onImgError = (e) => {
   e.currentTarget.onerror = null;
-  e.currentTarget.src = storyVendorSquare; // or placeholder
+  e.currentTarget.src = IMG_VENDOR_SECTION;
 };
 
 /* ------------------------------------------------------------
@@ -62,7 +59,7 @@ const Reveal = ({ children, className = "", delay = 0 }) => {
 ------------------------------------------------------------ */
 const STORIES = [
   {
-    img: storyCashExchange,
+    img: IMG_STORY_ADAH,
     badge: "East Africa",
     name: "Adah",
     title: "Investing in a micro-business",
@@ -72,7 +69,7 @@ const STORIES = [
       "Adah bought initial inventory, set aside school fees, and built a small savings cushion.",
   },
   {
-    img: storyManPhoneCash,
+    img: IMG_STORY_KASSIM,
     badge: "West Africa",
     name: "Kassim",
     title: "Paying debts & buying tools",
@@ -82,7 +79,7 @@ const STORIES = [
       "Delivered via mobile money—fast access, fewer fees, and no long trips or paperwork.",
   },
   {
-    img: storyBananaHead,
+    img: IMG_STORY_AMINA,
     badge: "East Africa",
     name: "Amina",
     title: "Diversifying a market stall",
@@ -215,9 +212,9 @@ export default function Impact() {
           <Reveal delay={150} className="order-1 md:order-2">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow">
               <img
-                src={storyVendorSquare}
+                src={IMG_VENDOR_SECTION}
                 onError={onImgError}
-                alt="Smiling market vendor"
+                alt="Woman browsing a vibrant African marketplace"
                 className="w-full h-full object-cover motion-safe:transition-transform motion-safe:duration-700 hover:scale-[1.03]"
                 loading="lazy"
               />

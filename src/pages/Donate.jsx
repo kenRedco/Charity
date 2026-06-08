@@ -7,7 +7,7 @@ import { FiCopy, FiCheckCircle, FiHelpCircle, FiAlertTriangle } from 'react-icon
 import { SiBinance, SiCoinbase } from 'react-icons/si';
 import { FaWallet } from 'react-icons/fa';
 import LiveDonationFeed from '../components/LiveDonationFeed';
-import donateChild from '../assets/donateChild.png';
+const IMG_DONATE_HERO = 'https://images.unsplash.com/photo-1629293360328-fc31e9e735a6?q=80&w=2000&auto=format&fit=crop';
 import { DONATION_WALLET } from '../config';
 
 /** Convert an ETH string to a wei integer string for EIP-681 URIs.
@@ -48,7 +48,7 @@ export default function Donate() {
         <div className="relative hidden lg:block">
           {/* ⬇️ CHANGED: use local asset instead of external URL */}
           <img
-            src={donateChild}
+            src={IMG_DONATE_HERO}
             alt="Smiling child, symbolizing the impact of your donation"
             className="absolute h-full w-full object-cover"
             loading="lazy"

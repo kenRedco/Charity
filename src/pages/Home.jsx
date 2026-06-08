@@ -4,7 +4,8 @@ import { ClientOnly } from 'vite-react-ssg';
 import usePageTitle from "../hooks/usePageTitle";
 import useCountUp from "../hooks/useCountUp";
 import PageMeta from "../components/PageMeta";
-import impactStoryImage from "../assets/storyMotherChildren.png";
+const IMG_HOME_HERO = 'https://images.unsplash.com/photo-1459183885421-5cc683b8dbba?q=80&w=2000&auto=format&fit=crop';
+const IMG_HOME_STORY = 'https://images.unsplash.com/photo-1557927755-7ce043096949?q=80&w=1200&auto=format&fit=crop';
 
 // Icons
 import { FiUsers, FiTrendingUp, FiTarget, FiGlobe } from 'react-icons/fi';
@@ -56,7 +57,7 @@ export default function Home() {
       {/* --- Hero Section --- */}
       <section className="relative h-[90vh] min-h-[700px] flex items-center text-white">
         <div className="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2940&auto=format&fit=crop" alt="Happy children in a community receiving aid" className="w-full h-full object-cover" />
+          <img src={IMG_HOME_HERO} alt="Children running through a sandy village in Africa" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-green-900/50 via-green-800/20 to-transparent"></div>
           <div className="absolute inset-0 bg-black/30"></div>
         </div>
@@ -137,8 +138,8 @@ export default function Home() {
               data-aos="fade-right"
             >
               <img
-                src={impactStoryImage}
-                alt="A mother and her two young sons smiling together"
+                src={IMG_HOME_STORY}
+                alt="A mother tenderly holding her child in South Africa"
                 className="w-full h-full object-cover max-h-[420px] motion-safe:transition-transform motion-safe:duration-700 group-hover:scale-[1.03]"
                 loading="lazy"
               />
@@ -153,11 +154,11 @@ export default function Home() {
                     East Africa
                   </span>
                   <h3 className="mt-1 text-white text-lg font-bold drop-shadow">
-                    A mother invests in her family’s future
+                    Every mother deserves to provide for her child
                   </h3>
                   <p className="mt-1 text-white/90 text-sm line-clamp-3">
-                    A single transfer helped this family cover school fees and set
-                    aside savings—turning short-term relief into long-term stability.
+                    Direct cash transfers give families the dignity of choice — covering
+                    school fees, food, and savings without bureaucracy.
                   </p>
                 </div>
               </div>
