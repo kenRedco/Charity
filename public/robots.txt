@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kenRedco.github.io/Charity/sitemap.xml

@@ -3,7 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CryptoCharity</title>
+
+    <!-- SPA redirect: decode path encoded by 404.html for GitHub Pages deep links -->
+    <script>
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function (s) {
+            return s.replace(/~and~/g, '&');
+          });
+          window.history.replaceState(
+            null,
+            null,
+            l.pathname.slice(0, -1) +
+              decoded[0] +
+              (decoded[1] ? '?' + decoded[1] : '') +
+              l.hash
+          );
+        }
+      })(window.location);
+    </script>
+
+    <!-- Favicon & manifest -->
+    <link rel="icon" type="image/svg+xml" href="/Charity/favicon.svg" />
+    <link rel="apple-touch-icon" href="/Charity/favicon.svg" />
+    <link rel="manifest" href="/Charity/site.webmanifest" />
+    <meta name="theme-color" content="#059669" />
+
+    <!-- Default title & description (overridden per-page by react-helmet-async) -->
+    <title>CryptoCharity — Direct Crypto Donations to Families in Need</title>
+    <meta
+      name="description"
+      content="CryptoCharity delivers direct crypto donations to families in need. 91% of funds go directly to recipients — transparent, fast, and dignified aid."
+    />
   </head>
   <body>
     <div id="root"></div>
