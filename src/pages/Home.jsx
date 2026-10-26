@@ -19,7 +19,6 @@ const GlobeSection = lazy(() => import('../components/GlobeSection'));
 const impactStats = [
   { icon: FiUsers, numericEnd: 10000, prefix: '', suffix: '+', label: "Families Supported" },
   { icon: FiTrendingUp, numericEnd: 12, prefix: '$', suffix: 'M+', label: "Delivered Directly" },
-  { icon: FiTarget, numericEnd: 91, prefix: '', suffix: '%', label: "Goes to Recipients" },
   { icon: FiGlobe, numericEnd: 4, prefix: '', suffix: '', label: "Countries Reached" },
 ];
 
@@ -50,7 +49,7 @@ export default function Home() {
     <div className="bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-100 overflow-x-hidden">
       <PageMeta
         title="CryptoCharity — Direct Crypto Donations to Families in Need"
-        description="CryptoCharity delivers direct crypto donations to families in need. 91% of funds go directly to recipients — transparent, fast, and dignified humanitarian aid."
+        description="CryptoCharity supports direct crypto donations to families in need with transparent, dignified humanitarian aid."
         path="/"
         includeJsonLd
       />
@@ -82,7 +81,7 @@ export default function Home() {
       {/* --- Impact Stats Section --- */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
             {impactStats.map((stat, index) => (
               <StatCard key={stat.label} {...stat} aosDelay={index * 100} />
             ))}
