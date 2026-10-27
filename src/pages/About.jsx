@@ -33,19 +33,19 @@ export default function About() {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <div data-aos="fade-right">
-            <FiTarget className="text-green-600 h-12 w-12 mb-4" />
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Our Mission</h2>
-            <p className="text-lg text-gray-700 leading-relaxed">
+            <FiTarget className="text-green-600 dark:text-green-400 h-12 w-12 mb-4" />
+            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 mb-4">Our Mission</h2>
+            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
               To give people the freedom to choose how to best improve their lives. We send cryptocurrency directly and transparently, empowering individuals to overcome poverty on their own terms.
             </p>
           </div>
           <div data-aos="fade-left">
-            <FiEye className="text-green-600 h-12 w-12 mb-4" />
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Our Vision</h2>
-            <p className="text-lg text-gray-700 leading-relaxed">
+            <FiEye className="text-green-600 dark:text-green-400 h-12 w-12 mb-4" />
+            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 mb-4">Our Vision</h2>
+            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
               We envision a future where all people have the resources to live a life of dignity and choice. A world where humanitarian aid is personal, impactful, and radically transparent.
             </p>
           </div>
@@ -53,42 +53,42 @@ export default function About() {
       </section>
 
       {/* Why Crypto Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white dark:bg-gray-950">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-extrabold text-gray-900 mb-4" data-aos="fade-up">The Crypto Advantage</h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-delay="100">
+          <h2 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-4" data-aos="fade-up">The Crypto Advantage</h2>
+          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-delay="100">
             Blockchain isn't just a buzzword; it's the engine for a better model of charity.
           </p>
           <div className="grid md:grid-cols-3 gap-10">
             <div className="p-8" data-aos="fade-up" data-aos-delay="100">
-              <FiZap className="h-12 w-12 mx-auto mb-4 text-green-600" />
+              <FiZap className="h-12 w-12 mx-auto mb-4 text-green-600 dark:text-green-400" />
               <h3 className="text-2xl font-bold mb-2">Unmatched Speed</h3>
-              <p className="text-gray-600">Funds can reach recipients in minutes, not weeks, bypassing slow, traditional banking systems.</p>
+              <p className="text-gray-600 dark:text-gray-400">Funds can reach recipients in minutes, not weeks, bypassing slow, traditional banking systems.</p>
             </div>
             <div className="p-8" data-aos="fade-up" data-aos-delay="200">
-              <FiTarget className="h-12 w-12 mx-auto mb-4 text-green-600" />
+              <FiTarget className="h-12 w-12 mx-auto mb-4 text-green-600 dark:text-green-400" />
               <h3 className="text-2xl font-bold mb-2">Drastic Efficiency</h3>
-              <p className="text-gray-600">By cutting out intermediaries, more of your donation (over 90%) goes directly to the person who needs it.</p>
+              <p className="text-gray-600 dark:text-gray-400">By cutting out intermediaries, more of your donation (over 90%) goes directly to the person who needs it.</p>
             </div>
             <div className="p-8" data-aos="fade-up" data-aos-delay="300">
-              <FiEye className="h-12 w-12 mx-auto mb-4 text-green-600" />
+              <FiEye className="h-12 w-12 mx-auto mb-4 text-green-600 dark:text-green-400" />
               <h3 className="text-2xl font-bold mb-2">Radical Transparency</h3>
-              <p className="text-gray-600">Every step of the donation process is verifiable on a public blockchain, building unparalleled trust.</p>
+              <p className="text-gray-600 dark:text-gray-400">Every step of the donation process is verifiable on a public blockchain, building unparalleled trust.</p>
             </div>
           </div>
         </div>
       </section>
       
       {/* Team Section */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-gray-50 dark:bg-gray-900">
           <div className="max-w-6xl mx-auto px-6 text-center">
-              <h2 className="text-4xl font-extrabold text-gray-900 mb-12" data-aos="fade-up">Meet Our Team</h2>
+              <h2 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-12" data-aos="fade-up">Meet Our Team</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
                   {teamMembers.map((member, index) => (
                       <div key={member.name} data-aos="fade-up" data-aos-delay={index * 100}>
                           <img src={member.image} alt={member.name} className="h-40 w-40 rounded-full mx-auto mb-4 object-cover shadow-lg" />
-                          <h3 className="text-xl font-bold text-gray-800">{member.name}</h3>
-                          <p className="text-green-600 font-semibold">{member.role}</p>
+                          <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">{member.name}</h3>
+                          <p className="text-green-600 dark:text-green-400 font-semibold">{member.role}</p>
                       </div>
                   ))}
               </div>

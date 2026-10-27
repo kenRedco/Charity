@@ -101,7 +101,7 @@ export default function Donate() {
         description="Send a cryptocurrency donation directly to the configured recipient wallet. Review the network, recipient, and amount before confirming in your wallet."
         path="/donate"
       />
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 min-h-screen">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 min-h-screen bg-gray-50 dark:bg-gray-900">
 
         {/* Left Side - Image & Mission */}
         <div className="relative hidden lg:block">
@@ -126,14 +126,14 @@ export default function Donate() {
         <div className="py-16 px-6 sm:px-12 lg:px-16">
           <div className="max-w-lg mx-auto lg:mx-0">
             <p className="text-sm font-semibold uppercase tracking-wider text-primary-700 mb-3">Direct giving · {currency.network}</p>
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-2">Give directly, on-chain.</h2>
-            <p className="text-lg text-gray-600 mb-8">Choose a cryptocurrency, review its network and recipient, then confirm the payment in your wallet.</p>
+            <h2 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-2">Give directly, on-chain.</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">Choose a cryptocurrency, review its network and recipient, then confirm the payment in your wallet.</p>
 
-            <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100" data-aos="fade-up">
-              <h3 className="text-2xl font-bold text-gray-800">Make a donation</h3>
-              <p className="text-gray-600 mt-1 mb-6">Select a currency and enter an optional amount.</p>
+            <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700" data-aos="fade-up">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Make a donation</h3>
+              <p className="text-gray-600 dark:text-gray-300 mt-1 mb-6">Select a currency and enter an optional amount.</p>
               <fieldset>
-                <legend className="block text-sm font-medium text-gray-700 mb-2">Cryptocurrency</legend>
+                <legend className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cryptocurrency</legend>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2" role="group" aria-label="Choose a cryptocurrency">
                   {Object.entries(DONATION_CURRENCIES).map(([code, option]) => (
                     <button
@@ -141,15 +141,15 @@ export default function Donate() {
                       type="button"
                       aria-pressed={currencyCode === code}
                       onClick={() => handleCurrencyChange(code)}
-                      className={`rounded-md border px-3 py-3 text-left transition ${currencyCode === code ? 'border-primary-600 bg-primary-50 text-primary-800 ring-2 ring-primary-500' : 'border-gray-300 text-gray-700 hover:border-primary-400'}`}
+                      className={`rounded-md border px-3 py-3 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 ${currencyCode === code ? 'border-primary-600 bg-primary-50 text-primary-800 ring-2 ring-primary-500 dark:border-primary-400 dark:bg-primary-900 dark:text-primary-100' : 'border-gray-300 bg-white text-gray-700 hover:border-primary-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-200 dark:hover:border-primary-400'}`}
                     >
                       <span className="block font-semibold">{option.name}</span>
-                      <span className="block text-xs text-gray-500">{option.ticker}</span>
+                      <span className="block text-xs text-gray-500 dark:text-gray-400">{option.ticker}</span>
                     </button>
                   ))}
                 </div>
               </fieldset>
-              <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mt-5 mb-1">Donation amount ({currency.ticker})</label>
+              <label htmlFor="amount" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mt-5 mb-1">Donation amount ({currency.ticker})</label>
               <div className="relative">
                 <input
                   type="text"
@@ -159,29 +159,29 @@ export default function Donate() {
                   value={amount}
                   onChange={(event) => setAmount(event.target.value)}
                   placeholder="0.00"
-                  className="w-full px-4 py-3 pr-14 border border-gray-300 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-3 pr-14 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 border border-gray-300 dark:border-gray-600 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                   aria-describedby="amount-help amount-error"
                 />
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">{currency.ticker}</span>
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 font-medium">{currency.ticker}</span>
               </div>
-              <p id="amount-help" className="text-xs text-gray-500 mt-2">Amount is optional. Confirm the currency and network in your wallet before sending.</p>
-              {amount && !amountBaseUnits && <p id="amount-error" className="text-sm text-red-700 mt-2" role="alert">Enter a positive {currency.ticker} amount with no more than {currency.decimals} decimal places.</p>}
+              <p id="amount-help" className="text-xs text-gray-500 dark:text-gray-400 mt-2">Amount is optional. Confirm the currency and network in your wallet before sending.</p>
+              {amount && !amountBaseUnits && <p id="amount-error" className="text-sm text-red-700 dark:text-red-300 mt-2" role="alert">Enter a positive {currency.ticker} amount with no more than {currency.decimals} decimal places.</p>}
               {canSendFromBrowserWallet ? (
                 <button
                   type="button"
                   onClick={handleDonate}
                   disabled={!amountBaseUnits || sending}
-                  className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-md bg-primary-600 px-5 py-3 font-semibold text-white transition hover:bg-primary-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+                  className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-md bg-primary-600 px-5 py-3 font-semibold text-white transition hover:bg-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-800 disabled:cursor-not-allowed disabled:bg-gray-300 dark:disabled:bg-gray-600"
                 >
                   <FaWallet aria-hidden="true" />
                   {sending ? 'Check your wallet...' : `Continue with ${currency.name} wallet`}
                 </button>
               ) : (
-                <p className="mt-5 rounded-md bg-blue-50 p-3 text-sm text-blue-800" role="status">Scan the QR code with a {currency.name} wallet or copy the address below. This browser does not submit {currency.ticker} transactions.</p>
+                <p className="mt-5 rounded-md bg-blue-50 dark:bg-blue-950 p-3 text-sm text-blue-800 dark:text-blue-200" role="status">Scan the QR code with a {currency.name} wallet or copy the address below. This browser does not submit {currency.ticker} transactions.</p>
               )}
-              {error && <p className="mt-4 text-sm text-red-700" role="alert">{error}</p>}
+              {error && <p className="mt-4 text-sm text-red-700 dark:text-red-300" role="alert">{error}</p>}
               {transactionHash && (
-                <div className="mt-4 rounded-md border border-green-200 bg-green-50 p-4 text-sm text-green-900" role="status">
+                <div className="mt-4 rounded-md border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950 p-4 text-sm text-green-900 dark:text-green-100" role="status">
                   <p className="font-semibold">Transaction submitted. Thank you.</p>
                   <p className="mt-1 break-all font-mono">{transactionHash}</p>
                   {explorerUrl && (
@@ -194,24 +194,24 @@ export default function Donate() {
             </div>
 
             {currency.address && (
-              <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 mt-8" data-aos="fade-up" data-aos-delay="100">
-                <h3 className="text-xl font-bold text-gray-800">Or send from any wallet</h3>
-                <p className="text-gray-600 mt-1 mb-5">Scan the payment request or copy the recipient address.</p>
+              <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 mt-8" data-aos="fade-up" data-aos-delay="100">
+                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">Or send from any wallet</h3>
+                <p className="text-gray-600 dark:text-gray-300 mt-1 mb-5">Scan the payment request or copy the recipient address.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
-                  <div className="p-2 bg-white border border-gray-100 rounded-lg aspect-square flex items-center justify-center">
+                  <div className="p-2 bg-white border border-gray-200 dark:border-gray-600 rounded-lg aspect-square flex items-center justify-center">
                     <ClientOnly fallback={<div className="w-full h-full bg-gray-100 rounded animate-pulse" />}>
                       {() => <QRCode value={qrCodeValue} size={192} style={{ height: 'auto', maxWidth: '100%', width: '100%' }} />}
                     </ClientOnly>
                   </div>
                   <div className="sm:col-span-2">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-700">{currency.name} recipient · {currency.network}</span>
-                      <button type="button" onClick={handleCopy} aria-label={copied ? 'Address copied' : 'Copy wallet address'} className="p-2 text-gray-500 hover:text-primary-600">
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{currency.name} recipient · {currency.network}</span>
+                      <button type="button" onClick={handleCopy} aria-label={copied ? 'Address copied' : 'Copy wallet address'} className="p-2 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-md">
                         {copied ? <FiCheckCircle className="text-primary-600" /> : <FiCopy />}
                       </button>
                     </div>
-                    <code className="block break-all bg-gray-100 text-gray-700 p-3 rounded-md text-sm font-mono">{currency.address}</code>
-                    <div className="mt-4 flex items-start gap-3 bg-blue-50 text-blue-800 p-3 rounded-lg">
+                    <code className="block break-all bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-200 p-3 rounded-md text-sm font-mono">{currency.address}</code>
+                    <div className="mt-4 flex items-start gap-3 bg-blue-50 dark:bg-blue-950 text-blue-800 dark:text-blue-200 p-3 rounded-lg">
                       <FiHelpCircle className="h-5 w-5 mt-0.5 flex-shrink-0" aria-hidden="true" />
                       <p className="text-sm">Only send {currency.ticker} on {currency.network}. {currencyCode === 'TRX' ? 'The QR contains the recipient address; enter the amount in your wallet.' : 'Confirm the recipient and network in your wallet before approving.'}</p>
                     </div>

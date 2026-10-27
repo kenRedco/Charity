@@ -95,7 +95,7 @@ const STORIES = [
 ------------------------------------------------------------ */
 const StoryCard = ({ s, index }) => (
   <Reveal delay={index * 100}>
-    <article className="group relative rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-shadow">
+    <article tabIndex="0" className="group relative rounded-2xl overflow-hidden bg-white dark:bg-gray-800 shadow-sm hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 transition-shadow">
       {/* Image */}
       <div className="aspect-[4/3] w-full overflow-hidden">
         <img
@@ -115,10 +115,10 @@ const StoryCard = ({ s, index }) => (
       </div>
 
       {/* Hover overlay with description */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 motion-safe:transition-opacity duration-300" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 motion-safe:transition-opacity duration-300" />
 
       <div className="absolute inset-x-0 bottom-0 p-5">
-        <div className="motion-safe:transition-all duration-500 translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0">
+        <div className="motion-safe:transition-all duration-500 translate-y-4 opacity-100 md:opacity-0 group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus-within:opacity-100">
           <h3 className="text-white text-lg font-bold drop-shadow-sm">
             {s.name} — {s.title}
           </h3>
@@ -130,7 +130,7 @@ const StoryCard = ({ s, index }) => (
 
       {/* Static content under image (visible even without hover) */}
       <div className="p-5">
-        <blockquote className="text-gray-800 italic">
+        <blockquote className="text-gray-800 dark:text-gray-100 italic">
           “{s.quote}”
         </blockquote>
       </div>
@@ -184,10 +184,10 @@ export default function Impact() {
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
           <Reveal className="order-2 md:order-1">
             <div>
-              <h2 className="text-3xl font-extrabold text-gray-900">
+              <h2 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100">
                 From transfer to transformation
               </h2>
-              <p className="mt-4 text-gray-700">
+              <p className="mt-4 text-gray-700 dark:text-gray-300">
                 Direct giving respects people’s choices. We verify recipients,
                 measure outcomes, and share results—so you can see the
                 difference your donation makes.
@@ -195,13 +195,13 @@ export default function Impact() {
               <div className="mt-6 flex gap-3">
                 <Link
                   to="/donate"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-green-600 text-white font-semibold hover:bg-green-700 transition"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-green-600 text-white font-semibold hover:bg-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950 transition"
                 >
                   Donate now
                 </Link>
                 <Link
                   to="/process"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-full ring-1 ring-gray-300 text-gray-800 font-semibold hover:bg-gray-50 transition"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-full ring-1 ring-gray-300 dark:ring-gray-600 text-gray-800 dark:text-gray-100 font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950 transition"
                 >
                   How it works
                 </Link>

@@ -26,7 +26,7 @@ function StatCard({ icon: Icon, numericEnd, prefix, suffix, label, aosDelay }) {
   const { ref, value } = useCountUp(numericEnd, { duration: 1800 });
   return (
     <div ref={ref} className="p-4" data-aos="fade-up" data-aos-delay={aosDelay}>
-      <Icon className="h-12 w-12 mx-auto mb-4 text-green-600" />
+      <Icon className="h-12 w-12 mx-auto mb-4 text-green-600 dark:text-green-400" />
       <h3 className="text-4xl md:text-5xl font-extrabold text-gray-800 dark:text-gray-100 mb-1" aria-label={`${prefix}${numericEnd}${suffix}`}>
         {prefix}{value.toLocaleString()}{suffix}
       </h3>
@@ -79,7 +79,7 @@ export default function Home() {
       </section>
 
       {/* --- Impact Stats Section --- */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
             {impactStats.map((stat, index) => (
@@ -109,18 +109,18 @@ export default function Home() {
       </section>
 
       {/* --- Impact Overview Section --- */}
-      <section className="py-24 bg-white" id="impact-overview">
+      <section className="py-24 bg-white dark:bg-gray-950" id="impact-overview">
         <div className="max-w-6xl mx-auto px-6">
           {/* Headline + intro */}
           <div className="text-center">
             <h2
-              className="text-4xl font-extrabold text-gray-900 mb-4"
+              className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-4"
               data-aos="fade-up"
             >
               From Code to Concrete Change
             </h2>
             <p
-              className="text-lg text-gray-700 max-w-3xl mx-auto mb-12"
+              className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-12"
               data-aos="fade-up"
               data-aos-delay="100"
             >
@@ -165,16 +165,16 @@ export default function Home() {
 
             {/* Text card */}
             <div
-              className="bg-gray-50 p-8 rounded-2xl shadow-sm flex flex-col justify-between"
+              className="bg-gray-50 dark:bg-gray-900 p-8 rounded-2xl shadow-sm flex flex-col justify-between"
               data-aos="fade-left"
               data-aos-delay="100"
             >
               <div>
-                <blockquote className="text-xl italic text-gray-800 mb-4 leading-relaxed">
+                <blockquote className="text-xl italic text-gray-800 dark:text-gray-100 mb-4 leading-relaxed">
                   “It wasn’t a handout. It was a seed. We invested, and now we can
                   plan ahead.”
                 </blockquote>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-300">
                   Direct giving respects choice. Funds arrive quickly via mobile
                   money, letting families invest in what matters most—food, school,
                   tools, or savings. Your donation moves with radical transparency

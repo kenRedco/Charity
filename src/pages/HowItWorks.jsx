@@ -58,17 +58,17 @@ export default function HowItWorks() {
         <div className="max-w-3xl mx-auto">
           <div className="relative">
             {/* The vertical line */}
-            <div className="absolute left-4 top-0 h-full w-0.5 bg-gray-200" data-aos="fade-up"></div>
+            <div className="absolute left-4 top-0 h-full w-0.5 bg-gray-200 dark:bg-gray-700" data-aos="fade-up"></div>
             
             {timelineSteps.map((step, index) => (
               <div key={index} className="relative pl-12 pb-16" data-aos="fade-up" data-aos-delay={index * 100}>
                 <div className="absolute left-0 top-1 flex items-center justify-center">
-                  <div className="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center ring-8 ring-white">
+                  <div className="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center ring-8 ring-white dark:ring-gray-950">
                     <step.icon className="w-4 h-4" />
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{step.title}</h3>
-                <p className="text-gray-700 leading-relaxed">{step.text}</p>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">{step.title}</h3>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{step.text}</p>
               </div>
             ))}
           </div>
@@ -76,10 +76,10 @@ export default function HowItWorks() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 dark:bg-gray-900 py-20">
         <div className="max-w-4xl mx-auto text-center px-6">
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-4" data-aos="fade-up">Ready to Start a Journey?</h2>
-            <p className="text-lg text-gray-700 mb-8" data-aos="fade-up" data-aos-delay="100">
+            <h2 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-4" data-aos="fade-up">Ready to Start a Journey?</h2>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="100">
                 Your donation can be the catalyst for change. Be a part of the movement.
             </p>
             <div data-aos="fade-up" data-aos-delay="200">
