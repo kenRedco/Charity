@@ -149,7 +149,7 @@ export default function Impact() {
       <section className="py-16 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {STORIES.map((s, i) => (
-            <StoryCard key={s.name} s={s} index={i} />
+            <StoryCard key={s.title} s={s} index={i} />
           ))}
         </div>
       </section>
