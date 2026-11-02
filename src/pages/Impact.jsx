@@ -1,18 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import PageMeta from "../components/PageMeta";
-
-// Story images — free-to-use photos from Unsplash
-const IMG_STORY_ADAH    = 'https://images.unsplash.com/photo-1778079247396-9c0e01c83c8b?q=80&w=800&auto=format&fit=crop';
-const IMG_STORY_KASSIM  = 'https://images.unsplash.com/photo-1540302819037-abacaf0f1e1e?q=80&w=800&auto=format&fit=crop';
-const IMG_STORY_AMINA   = 'https://images.unsplash.com/photo-1761370980657-22586ea44093?q=80&w=800&auto=format&fit=crop';
-const IMG_VENDOR_SECTION = 'https://images.unsplash.com/photo-1760726744447-97f9d190a701?q=80&w=1200&auto=format&fit=crop';
-
-// Fallback for broken images
-const onImgError = (e) => {
-  e.currentTarget.onerror = null;
-  e.currentTarget.src = IMG_VENDOR_SECTION;
-};
+import diapers from "../assets/3E3D2A9D-5E5F-4CB6-A1A1-8EE0A3E5D78D.jpeg";
+import classroom from "../assets/45F86866-96E5-4138-8618-B78B3BB6D5A5.png";
+import waterSupplies from "../assets/51D63461-C729-45FD-B988-4A81DD572E59.png";
+import waterDistribution from "../assets/647E7D86-87E3-4861-AD0E-6CAB18A7A7DE.png";
+import reliefPackages from "../assets/9EC4E8E6-8101-483E-8D6C-170B375FCAB2.jpeg";
 
 /* ------------------------------------------------------------
    A tiny "Reveal" component (intersection observer)
@@ -59,34 +52,32 @@ const Reveal = ({ children, className = "", delay = 0 }) => {
 ------------------------------------------------------------ */
 const STORIES = [
   {
-    img: IMG_STORY_ADAH,
-    badge: "East Africa",
-    name: "Adah",
-    title: "Investing in a micro-business",
-    quote:
-      "It wasn’t a handout. It was a seed. We invested, and now we can plan ahead.",
-    detail:
-      "Adah bought initial inventory, set aside school fees, and built a small savings cushion.",
+    img: waterSupplies,
+    alt: "Volunteers and neighbors organize cases of drinking water at an outdoor relief point",
+    badge: "Water relief",
+    title: "A steady supply, shared together",
+    detail: "Bottled water is gathered and sorted so people can collect what they need.",
   },
   {
-    img: IMG_STORY_KASSIM,
-    badge: "West Africa",
-    name: "Kassim",
-    title: "Paying debts & buying tools",
-    quote:
-      "The money arrived on my phone. I paid debts and bought tools to grow my income.",
-    detail:
-      "Delivered via mobile money—fast access, fewer fees, and no long trips or paperwork.",
+    img: diapers,
+    alt: "Boxes of diapers and family care essentials ready for donation",
+    badge: "Family essentials",
+    title: "Small necessities, meaningful relief",
+    detail: "Diapers and daily care items are packed alongside food and household supplies.",
   },
   {
-    img: IMG_STORY_AMINA,
-    badge: "East Africa",
-    name: "Amina",
-    title: "Diversifying a market stall",
-    quote:
-      "We added products and now earn steadily—even in the slow season.",
-    detail:
-      "Choice let Amina expand what mattered most for her family’s resilience.",
+    img: classroom,
+    alt: "A group of children sits together in a colorful classroom as a teacher holds a violin",
+    badge: "Learning & play",
+    title: "A classroom alive with possibility",
+    detail: "Children gather in a bright learning space for a shared moment of music.",
+  },
+  {
+    img: reliefPackages,
+    alt: "Volunteers prepare rows of packed relief bags and supply boxes for distribution",
+    badge: "Community response",
+    title: "Many hands make ready help",
+    detail: "Every bag and box is another bundle of practical supplies prepared to share.",
   },
 ];
 
@@ -95,13 +86,12 @@ const STORIES = [
 ------------------------------------------------------------ */
 const StoryCard = ({ s, index }) => (
   <Reveal delay={index * 100}>
-    <article tabIndex="0" className="group relative rounded-2xl overflow-hidden bg-white dark:bg-gray-800 shadow-sm hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 transition-shadow">
+    <article tabIndex="0" className="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-sm ring-1 ring-black/5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 transition-shadow">
       {/* Image */}
       <div className="aspect-[4/3] w-full overflow-hidden">
         <img
           src={s.img}
-          onError={onImgError}
-          alt={`${s.name} — ${s.badge}`}
+          alt={s.alt}
           className="w-full h-full object-cover motion-safe:transition-transform motion-safe:duration-700 group-hover:scale-[1.05]"
           loading="lazy"
         />
@@ -114,25 +104,12 @@ const StoryCard = ({ s, index }) => (
         </span>
       </div>
 
-      {/* Hover overlay with description */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 motion-safe:transition-opacity duration-300" />
-
-      <div className="absolute inset-x-0 bottom-0 p-5">
-        <div className="motion-safe:transition-all duration-500 translate-y-4 opacity-100 md:opacity-0 group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus-within:opacity-100">
-          <h3 className="text-white text-lg font-bold drop-shadow-sm">
-            {s.name} — {s.title}
-          </h3>
-          <p className="mt-1 text-white/90 text-sm line-clamp-3">
-            {s.detail}
-          </p>
-        </div>
-      </div>
+      <div className="pointer-events-none absolute inset-x-0 bottom-[7.25rem] h-20 bg-gradient-to-t from-black/50 to-transparent opacity-70 transition-opacity group-hover:opacity-100" />
 
       {/* Static content under image (visible even without hover) */}
       <div className="p-5">
-        <blockquote className="text-gray-800 dark:text-gray-100 italic">
-          “{s.quote}”
-        </blockquote>
+        <h2 className="text-lg font-bold leading-snug text-gray-900 dark:text-gray-100">{s.title}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">{s.detail}</p>
       </div>
     </article>
   </Reveal>
@@ -146,7 +123,7 @@ export default function Impact() {
     <div className="bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-100">
       <PageMeta
         title="Real Impact Stories — Families Empowered by Crypto Donations"
-        description="See how direct crypto donations transform lives. Real stories from East and West Africa: micro-businesses started, school fees paid, and futures secured."
+        description="See community relief in action: neighbors organize drinking water, family essentials, classroom activities, and practical supply packages."
         path="/impact"
       />
   {/* Header */}
@@ -161,9 +138,7 @@ export default function Impact() {
       data-aos="fade-up"
       data-aos-delay="100"
     >
-      Your crypto donations arrive as cash transfers people can use for
-      what they need most—food, school, tools, or savings. Hover over
-      each story to see the details.
+      Relief takes many forms: clean water, family essentials, learning spaces, and neighbors ready to help.
     </p>
   </div>
 </section>
@@ -171,8 +146,8 @@ export default function Impact() {
 
 
       {/* Stories grid */}
-      <section className="py-16">
-        <div className="max-w-6xl mx-auto px-6 grid gap-10 md:grid-cols-3">
+      <section className="py-16 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {STORIES.map((s, i) => (
             <StoryCard key={s.name} s={s} index={i} />
           ))}
@@ -188,9 +163,7 @@ export default function Impact() {
                 From transfer to transformation
               </h2>
               <p className="mt-4 text-gray-700 dark:text-gray-300">
-                Direct giving respects people’s choices. We verify recipients,
-                measure outcomes, and share results—so you can see the
-                difference your donation makes.
+                From bottled water and baby supplies to learning materials, the most useful support is often wonderfully practical. These moments show neighbors gathering, sorting, and sharing what people can use right away.
               </p>
               <div className="mt-6 flex gap-3">
                 <Link
@@ -210,17 +183,16 @@ export default function Impact() {
           </Reveal>
 
           <Reveal delay={150} className="order-1 md:order-2">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow">
+            <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl shadow-xl ring-1 ring-black/5">
               <img
-                src={IMG_VENDOR_SECTION}
-                onError={onImgError}
-                alt="Woman browsing a vibrant African marketplace"
+                src={waterDistribution}
+                alt="Volunteers and community members collect bottled water at an outdoor relief distribution"
                 className="w-full h-full object-cover motion-safe:transition-transform motion-safe:duration-700 hover:scale-[1.03]"
                 loading="lazy"
               />
-              {/* subtle gradient border on hover */}
-              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 group-hover:ring-4" />
-              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-black/5" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-5 pb-5 pt-16">
+                <p className="text-sm font-semibold text-white">Water, ready to reach the next person</p>
+              </div>
             </div>
           </Reveal>
         </div>

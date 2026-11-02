@@ -4,8 +4,8 @@ import { ClientOnly } from 'vite-react-ssg';
 import usePageTitle from "../hooks/usePageTitle";
 import useCountUp from "../hooks/useCountUp";
 import PageMeta from "../components/PageMeta";
-const IMG_HOME_HERO = 'https://images.unsplash.com/photo-1459183885421-5cc683b8dbba?q=80&w=2000&auto=format&fit=crop';
-const IMG_HOME_STORY = 'https://images.unsplash.com/photo-1557927755-7ce043096949?q=80&w=1200&auto=format&fit=crop';
+import clothingDrive from "../assets/C15DAB55-1AE7-4CCD-8F51-A9148E3B9298 (1).png";
+import toyDrive from "../assets/D5572509-624D-4778-80D5-17738F0418E6.png";
 
 // Icons
 import { FiUsers, FiTrendingUp, FiTarget, FiGlobe } from 'react-icons/fi';
@@ -56,16 +56,15 @@ export default function Home() {
       {/* --- Hero Section --- */}
       <section className="relative h-[90vh] min-h-[700px] flex items-center text-white">
         <div className="absolute inset-0">
-          <img src={IMG_HOME_HERO} alt="Children running through a sandy village in Africa" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-green-900/50 via-green-800/20 to-transparent"></div>
-          <div className="absolute inset-0 bg-black/30"></div>
+          <img src={clothingDrive} alt="Neighbors gather around donated clothing at an outdoor community drive" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/10"></div>
         </div>
         <div className="relative z-10 max-w-5xl mx-auto text-center px-6">
           <h1 className="text-5xl md:text-7xl font-extrabold mb-4 drop-shadow-xl" data-aos="fade-up">
             Empowering Lives Through Direct Crypto Giving
           </h1>
           <p className="max-w-3xl mx-auto mb-8 text-lg md:text-xl opacity-95" data-aos="fade-up" data-aos-delay="200">
-            We deliver humanitarian aid with dignity, transparency, and revolutionary efficiency. Your donation, their choice, our shared impact.
+            Every shared resource can make a difficult day lighter. See neighbors come together to sort clothing, water, toys, and everyday essentials.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4" data-aos="fade-up" data-aos-delay="400">
             <Link to="/donate" className="w-full sm:w-auto inline-block px-10 py-4 bg-green-500 text-white font-bold rounded-full shadow-lg hover:bg-green-600 hover:scale-105 transform transition-all text-lg">
@@ -124,8 +123,7 @@ export default function Home() {
               data-aos="fade-up"
               data-aos-delay="100"
             >
-              See how direct crypto donations empower families to build their own
-              futures. Hover over the photo to learn more about this story.
+              Neighbors gather around a shared collection of toys and play materials, choosing what will bring a little more joy home.
             </p>
           </div>
 
@@ -133,31 +131,30 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             {/* Image with hover overlay */}
             <div
-              className="group relative rounded-2xl overflow-hidden shadow-xl"
+              className="group relative aspect-[4/3] overflow-hidden rounded-xl shadow-xl ring-1 ring-black/5"
               data-aos="fade-right"
             >
               <img
-                src={IMG_HOME_STORY}
-                alt="A mother tenderly holding her child in South Africa"
-                className="w-full h-full object-cover max-h-[420px] motion-safe:transition-transform motion-safe:duration-700 group-hover:scale-[1.03]"
+                src={toyDrive}
+                alt="Children explore donated toys and play materials at a community distribution"
+                className="absolute inset-0 w-full h-full object-cover object-center motion-safe:transition-transform motion-safe:duration-700 group-hover:scale-[1.03]"
                 loading="lazy"
               />
 
               {/* Gradient overlay */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 motion-safe:transition-opacity duration-300" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
               {/* Hover text reveal */}
               <div className="absolute inset-x-0 bottom-0 p-5">
-                <div className="translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 motion-safe:transition-all duration-500">
+                <div className="translate-y-2 motion-safe:transition-transform duration-500 group-hover:translate-y-0">
                   <span className="inline-block text-xs font-semibold tracking-wide uppercase text-white/90">
-                    East Africa
+                    Shared essentials
                   </span>
                   <h3 className="mt-1 text-white text-lg font-bold drop-shadow">
-                    Every mother deserves to provide for her child
+                    Play begins with a chance to explore
                   </h3>
                   <p className="mt-1 text-white/90 text-sm line-clamp-3">
-                    Direct cash transfers give families the dignity of choice — covering
-                    school fees, food, and savings without bureaucracy.
+                    Toys and learning materials find new hands as families browse a community collection together.
                   </p>
                 </div>
               </div>
@@ -170,15 +167,11 @@ export default function Home() {
               data-aos-delay="100"
             >
               <div>
-                <blockquote className="text-xl italic text-gray-800 dark:text-gray-100 mb-4 leading-relaxed">
-                  “It wasn’t a handout. It was a seed. We invested, and now we can
-                  plan ahead.”
-                </blockquote>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 leading-snug">
+                  Care is practical. It looks like the things people need, ready to share.
+                </h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Direct giving respects choice. Funds arrive quickly via mobile
-                  money, letting families invest in what matters most—food, school,
-                  tools, or savings. Your donation moves with radical transparency
-                  on-chain and minimal overhead.
+                  A clothing drive becomes a place to find a warm layer, a useful item, or something new for a child. The best support starts by listening to what matters in each moment.
                 </p>
               </div>
 
