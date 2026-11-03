@@ -15,6 +15,7 @@ const CURRENCY_MARKS = {
   BTC: { Icon: SiBitcoin, color: '#f7931a', background: 'bg-[#f7931a]/10' },
   SOL: { Icon: SiSolana, color: '#14a979', background: 'bg-[#14a979]/10' },
   TRX: { Icon: FaCoins, color: '#ef0027', background: 'bg-[#ef0027]/10' },
+  XRP: { Icon: FaCoins, color: '#23292f', background: 'bg-[#23292f]/10' },
 };
 
 function amountToBaseUnits(amount, decimals) {
@@ -66,6 +67,11 @@ export default function Donate() {
     setError('');
     setTransactionHash('');
     if (!amountBaseUnits || !amountFitsWalletApi) return;
+
+    if (currencyCode === 'XRP') {
+      setError('To send XRP, scan the QR code or copy the address below, then enter the amount in your XRP Ledger wallet. Confirm the XRP Ledger network before sending.');
+      return;
+    }
 
     const wallets = {
       ETH: window.ethereum,
@@ -246,7 +252,7 @@ export default function Donate() {
                 className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-md bg-coral px-5 py-3 font-semibold text-white transition hover:bg-coral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-800 disabled:cursor-not-allowed disabled:bg-gray-300 dark:disabled:bg-gray-600"
               >
                 <FaWallet aria-hidden="true" />
-                {sending ? 'Check your wallet...' : `Continue with ${currency.name} wallet`}
+                {sending ? 'Check your wallet...' : currencyCode === 'XRP' ? 'View XRP payment instructions' : `Continue with ${currency.name} wallet`}
               </button>
               {error && <p className="mt-4 text-sm text-red-700 dark:text-red-300" role="alert">{error}</p>}
               {transactionHash && (
@@ -282,7 +288,7 @@ export default function Donate() {
                     <code className="block break-all bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-200 p-3 rounded-md text-sm font-mono">{currency.address}</code>
                     <div className="mt-4 flex items-start gap-3 bg-blue-50 dark:bg-blue-950 text-blue-800 dark:text-blue-200 p-3 rounded-lg">
                       <FiHelpCircle className="h-5 w-5 mt-0.5 flex-shrink-0" aria-hidden="true" />
-                      <p className="text-sm">Only send {currency.ticker} on {currency.network}. {currencyCode === 'TRX' ? 'The QR contains the recipient address; enter the amount in your wallet.' : 'Confirm the recipient and network in your wallet before approving.'}</p>
+                      <p className="text-sm">Only send {currency.ticker} on {currency.network}. {currencyCode === 'TRX' || currencyCode === 'XRP' ? 'The QR contains the recipient address; enter the amount in your wallet.' : 'Confirm the recipient and network in your wallet before approving.'}</p>
                     </div>
                   </div>
                 </div>

@@ -50,6 +50,14 @@ export const DONATION_CURRENCIES = {
     decimals: 6,
     qrScheme: 'address',
   },
+  XRP: {
+    name: 'XRP',
+    ticker: 'XRP',
+    network: 'XRP Ledger',
+    address: 'rwGSVwytC9y9Tq3ZE5gMN3fbpxe4vbnEKU',
+    decimals: 6,
+    qrScheme: 'address',
+  },
 };
 
 // Set a URL string for links that exist; leave as empty string to hide the icon.
