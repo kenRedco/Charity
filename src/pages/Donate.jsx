@@ -7,7 +7,7 @@ import { FiCopy, FiCheckCircle, FiHelpCircle, FiExternalLink } from 'react-icons
 import { FaCoins, FaWallet } from 'react-icons/fa';
 import { SiBitcoin, SiEthereum, SiSolana } from 'react-icons/si';
 import { Connection, PublicKey, SystemProgram, Transaction } from '@solana/web3.js';
-const IMG_DONATE_HERO = 'https://images.unsplash.com/photo-1629293360328-fc31e9e735a6?q=80&w=2000&auto=format&fit=crop';
+import classroomPhoto from '../assets/45F86866-96E5-4138-8618-B78B3BB6D5A5.png';
 import { DONATION_CURRENCIES } from '../config';
 
 const CURRENCY_MARKS = {
@@ -166,10 +166,9 @@ export default function Donate() {
 
         {/* Left Side - Image & Mission */}
         <div className="relative hidden lg:block">
-          {/* ⬇️ CHANGED: use local asset instead of external URL */}
           <img
-            src={IMG_DONATE_HERO}
-            alt="Smiling child, symbolizing the impact of your donation"
+            src={classroomPhoto}
+            alt="Children gathered in a colorful classroom as their teacher holds a violin"
             className="absolute h-full w-full object-cover"
             loading="lazy"
           />
