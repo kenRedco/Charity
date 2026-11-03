@@ -4,10 +4,18 @@ import usePageTitle from '../hooks/usePageTitle';
 import PageMeta from '../components/PageMeta';
 import QRCode from 'react-qr-code';
 import { FiCopy, FiCheckCircle, FiHelpCircle, FiExternalLink } from 'react-icons/fi';
-import { FaWallet } from 'react-icons/fa';
+import { FaCoins, FaWallet } from 'react-icons/fa';
+import { SiBitcoin, SiEthereum, SiSolana } from 'react-icons/si';
 import { Connection, PublicKey, SystemProgram, Transaction } from '@solana/web3.js';
 const IMG_DONATE_HERO = 'https://images.unsplash.com/photo-1629293360328-fc31e9e735a6?q=80&w=2000&auto=format&fit=crop';
 import { DONATION_CURRENCIES } from '../config';
+
+const CURRENCY_MARKS = {
+  ETH: { Icon: SiEthereum, color: '#627eea', background: 'bg-[#627eea]/10' },
+  BTC: { Icon: SiBitcoin, color: '#f7931a', background: 'bg-[#f7931a]/10' },
+  SOL: { Icon: SiSolana, color: '#14a979', background: 'bg-[#14a979]/10' },
+  TRX: { Icon: FaCoins, color: '#ef0027', background: 'bg-[#ef0027]/10' },
+};
 
 function amountToBaseUnits(amount, decimals) {
   if (!/^\d+(\.\d+)?$/.test(amount)) return '';
@@ -189,16 +197,28 @@ export default function Donate() {
                 <legend className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cryptocurrency</legend>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2" role="group" aria-label="Choose a cryptocurrency">
                   {Object.entries(DONATION_CURRENCIES).map(([code, option]) => (
-                    <button
-                      key={code}
-                      type="button"
-                      aria-pressed={currencyCode === code}
-                      onClick={() => handleCurrencyChange(code)}
-                      className={`rounded-md border px-3 py-3 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 ${currencyCode === code ? 'border-primary-600 bg-primary-50 text-primary-800 ring-2 ring-primary-500 dark:border-primary-400 dark:bg-primary-900 dark:text-primary-100' : 'border-gray-300 bg-white text-gray-700 hover:border-primary-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-200 dark:hover:border-primary-400'}`}
-                    >
-                      <span className="block font-semibold">{option.name}</span>
-                      <span className="block text-xs text-gray-500 dark:text-gray-400">{option.ticker}</span>
-                    </button>
+                    (() => {
+                      const { Icon, color, background } = CURRENCY_MARKS[code];
+                      const isSelected = currencyCode === code;
+
+                      return (
+                        <button
+                          key={code}
+                          type="button"
+                          aria-pressed={isSelected}
+                          onClick={() => handleCurrencyChange(code)}
+                          className={`flex min-h-[76px] items-center gap-2 rounded-md border px-2.5 py-3 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral sm:gap-3 sm:px-3 ${isSelected ? 'border-coral bg-coral-50 ring-2 ring-coral dark:border-coral-200 dark:bg-coral-800/20' : 'border-gray-300 bg-white hover:border-forest/40 dark:border-gray-600 dark:bg-gray-900'}`}
+                        >
+                          <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-md ${background}`}>
+                            <Icon className="h-6 w-6" style={{ color }} aria-hidden="true" />
+                          </span>
+                          <span className="min-w-0">
+                            <span className="block truncate font-semibold text-gray-800 dark:text-gray-100">{option.name}</span>
+                            <span className="block text-xs text-gray-500 dark:text-gray-400">{option.ticker}</span>
+                          </span>
+                        </button>
+                      );
+                    })()
                   ))}
                 </div>
               </fieldset>
