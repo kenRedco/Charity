@@ -6,13 +6,13 @@ export default function TermsOfService() {
   usePageTitle('Terms of Service');
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 py-20 px-6">
+    <div className="bg-paper dark:bg-gray-900 py-16 sm:py-20 px-4 sm:px-6">
       <PageMeta
         title="Terms of Service"
         description="CryptoCharity's terms of service: agreement, acceptable use, donation terms, and limitation of liability."
         path="/terms"
       />
-      <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 sm:p-8 md:p-12 rounded-xl shadow-lg">
+      <div className="journal-panel max-w-4xl mx-auto p-6 sm:p-8 md:p-12">
         <h1 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-6">Terms of Service</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
         

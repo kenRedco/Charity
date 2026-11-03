@@ -68,28 +68,30 @@ export default function App() {
   };
 
   const navLinkClass = ({ isActive }) =>
-    `pb-1 border-b-2 transition-colors duration-300 ${
-      isActive ? 'border-primary-600' : 'border-transparent'
+    `px-3 py-2 rounded-md transition-colors duration-200 ${
+      isActive
+        ? scrolled ? 'bg-coral/10 text-coral' : 'bg-white/15 text-white'
+        : ''
     } ${
       scrolled
-        ? 'text-gray-800 dark:text-gray-200 hover:border-primary-600'
-        : 'text-white hover:border-white/80'
+        ? 'text-ink dark:text-gray-200 hover:bg-forest/5 dark:hover:bg-white/10'
+        : 'text-white/90 hover:bg-white/10 hover:text-white'
     }`;
 
   return (
-    <div className="min-h-screen overflow-x-clip bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col transition-colors duration-300">
+    <div className="min-h-screen overflow-x-clip bg-paper dark:bg-gray-950 text-ink dark:text-gray-100 flex flex-col transition-colors duration-300">
       {/* ── Header ── */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out px-6 py-4 flex justify-between items-center ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out px-4 sm:px-6 py-3 flex justify-between items-center ${
           scrolled
-            ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md'
-            : 'bg-transparent'
+            ? 'bg-paper/95 dark:bg-gray-950/95 backdrop-blur-xl shadow-sm border-b border-forest/10 dark:border-white/10'
+            : 'bg-gradient-to-b from-black/25 to-transparent'
         }`}
       >
         <Link
           to="/"
           className={`text-2xl font-bold transition-colors duration-300 ${
-            scrolled ? 'text-primary-700 dark:text-primary-400' : 'text-white drop-shadow-md'
+            scrolled ? 'text-forest dark:text-white' : 'text-white drop-shadow-md'
           }`}
         >
           CryptoCharity
@@ -110,7 +112,7 @@ export default function App() {
             aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
             className={`p-2 rounded-full transition-colors ${
               scrolled
-                ? 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                ? 'text-forest dark:text-gray-300 hover:bg-forest/5 dark:hover:bg-white/10'
                 : 'text-white hover:bg-white/20'
             }`}
           >
@@ -119,11 +121,7 @@ export default function App() {
 
           <Link
             to="/donate"
-            className={`font-semibold px-5 py-2 rounded-full transition-all duration-300 hover:scale-105 ${
-              scrolled
-                ? 'bg-primary-600 text-white shadow-sm hover:bg-primary-700'
-                : 'bg-white text-primary-700 shadow-md hover:bg-gray-100'
-            }`}
+            className="font-semibold px-5 py-2.5 rounded-md bg-coral text-white shadow-sm hover:bg-coral/90 transition-colors"
           >
             Donate Now
           </Link>
@@ -156,7 +154,7 @@ export default function App() {
         role="dialog"
         aria-modal="true"
         aria-label="Navigation menu"
-        className={`fixed inset-0 z-[100] bg-gray-900/95 backdrop-blur-sm transition-opacity duration-300 ${
+        className={`fixed inset-0 z-[100] bg-forest/98 dark:bg-gray-950/98 backdrop-blur-xl transition-opacity duration-300 ${
           isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
@@ -181,7 +179,7 @@ export default function App() {
             <Link
               to="/donate"
               onClick={closeMenu}
-              className="mt-8 bg-primary-500 text-white font-bold px-10 py-4 rounded-full text-xl"
+              className="mt-8 bg-coral text-white font-bold px-10 py-4 rounded-md text-xl"
             >
               Donate Now
             </Link>
@@ -194,7 +192,7 @@ export default function App() {
       </main>
 
       {/* ── Footer ── */}
-      <footer className="bg-gray-800 dark:bg-gray-950 text-white pt-20 pb-10">
+      <footer className="bg-forest dark:bg-gray-950 text-white pt-16 pb-8 border-t-4 border-coral">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-12">
             <div className="md:col-span-1">
@@ -211,12 +209,12 @@ export default function App() {
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   required
-                  className="w-full px-4 py-3 rounded-md bg-white text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-400"
+                  className="w-full px-4 py-3 rounded-md bg-white/10 text-white placeholder:text-white/55 border border-white/20 focus:outline-none focus:ring-2 focus:ring-coral"
                 />
                 <button
                   type="submit"
                   disabled={newsletterStatus === 'submitting'}
-                  className="bg-primary text-white font-bold px-6 py-3 rounded-md hover:bg-primary-700 transition-colors disabled:bg-gray-400"
+                  className="bg-coral text-white font-bold px-6 py-3 rounded-md hover:bg-coral/90 transition-colors disabled:bg-gray-400"
                 >
                   {newsletterStatus === 'submitting' ? 'Submitting…' : 'Subscribe'}
                 </button>
@@ -232,7 +230,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="mt-16 pt-8 border-t border-gray-700 flex flex-col sm:flex-row justify-between items-center">
+          <div className="mt-12 pt-6 border-t border-white/20 flex flex-col sm:flex-row justify-between items-center gap-5">
             <div className="text-sm opacity-60 mb-4 sm:mb-0">
               © {new Date().getFullYear()} CryptoCharity. All rights reserved.
             </div>

@@ -54,23 +54,24 @@ export default function Home() {
         includeJsonLd
       />
       {/* --- Hero Section --- */}
-      <section className="relative h-[90vh] min-h-[700px] flex items-center text-white">
+      <section className="relative h-[84svh] min-h-[620px] flex items-center text-white">
         <div className="absolute inset-0">
           <img src={clothingDrive} alt="Neighbors gather around donated clothing at an outdoor community drive" className="w-full h-full object-cover object-center" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/10"></div>
         </div>
-        <div className="relative z-10 max-w-5xl mx-auto text-center px-6">
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-4 drop-shadow-xl" data-aos="fade-up">
+        <div className="relative z-10 max-w-5xl mx-auto text-center px-6 pt-16">
+          <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-coral-200" data-aos="fade-up">Dignity, in every gesture</p>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl leading-[1.05] mb-5 drop-shadow-xl" data-aos="fade-up">
             Empowering Lives Through Direct Crypto Giving
           </h1>
           <p className="max-w-3xl mx-auto mb-8 text-lg md:text-xl opacity-95" data-aos="fade-up" data-aos-delay="200">
             Every shared resource can make a difficult day lighter. See neighbors come together to sort clothing, water, toys, and everyday essentials.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4" data-aos="fade-up" data-aos-delay="400">
-            <Link to="/donate" className="w-full sm:w-auto inline-block px-10 py-4 bg-green-500 text-white font-bold rounded-full shadow-lg hover:bg-green-600 hover:scale-105 transform transition-all text-lg">
+            <Link to="/donate" className="w-full sm:w-auto inline-block px-8 py-4 bg-coral text-white font-bold rounded-md shadow-lg hover:bg-coral-800 transform transition-all text-lg">
               Donate Now
             </Link>
-            <a href="#how-it-works" className="w-full sm:w-auto inline-block px-10 py-4 text-white font-semibold rounded-full hover:bg-white/20 transition-colors text-lg">
+            <a href="#how-it-works" className="w-full sm:w-auto inline-block px-8 py-4 text-white font-semibold border border-white/50 rounded-md hover:bg-white/15 transition-colors text-lg">
               Learn More
             </a>
           </div>
@@ -78,7 +79,7 @@ export default function Home() {
       </section>
 
       {/* --- Impact Stats Section --- */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+      <section className="py-14 sm:py-18 bg-paper dark:bg-gray-900 border-y border-forest/10 dark:border-white/10">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
             {impactStats.map((stat, index) => (
@@ -89,7 +90,7 @@ export default function Home() {
       </section>
       
       {/* --- How It Works Section --- */}
-      <section id="how-it-works" className="py-24 bg-gradient-to-br from-green-600 to-emerald-700 text-white">
+      <section id="how-it-works" className="py-20 sm:py-24 bg-forest text-white relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-extrabold mb-4" data-aos="fade-up">A Revolution in Giving</h2>
           <p className="text-lg opacity-90 max-w-3xl mx-auto mb-20" data-aos="fade-up" data-aos-delay="100">
@@ -97,9 +98,10 @@ export default function Home() {
           </p>
           <div className="grid md:grid-cols-3 gap-10">
             {howItWorksSteps.map((step, index) => (
-              <div key={step.title} className="p-8 bg-white/10 rounded-2xl backdrop-blur-sm border border-white/20 shadow-lg hover:bg-white/20 transition-all" data-aos="fade-up" data-aos-delay={100 * (index + 1)}>
-                <step.icon className="h-16 w-16 mx-auto mb-6 text-white"/>
-                <h3 className="text-2xl font-bold mb-2">{step.title}</h3>
+              <div key={step.title} className="p-7 bg-white/5 rounded-xl border border-white/15 hover:bg-white/10 transition-colors text-left" data-aos="fade-up" data-aos-delay={100 * (index + 1)}>
+                <span className="text-xs font-bold uppercase tracking-[0.16em] text-coral-200">0{index + 1}</span>
+                <step.icon className="h-9 w-9 mt-5 mb-5 text-coral-200"/>
+                <h3 className="text-2xl mb-2">{step.title}</h3>
                 <p className="opacity-80 leading-relaxed">{step.description}</p>
               </div>
             ))}
@@ -108,7 +110,7 @@ export default function Home() {
       </section>
 
       {/* --- Impact Overview Section --- */}
-      <section className="py-24 bg-white dark:bg-gray-950" id="impact-overview">
+      <section className="py-20 sm:py-24 bg-white dark:bg-gray-950" id="impact-overview">
         <div className="max-w-6xl mx-auto px-6">
           {/* Headline + intro */}
           <div className="text-center">
@@ -162,7 +164,7 @@ export default function Home() {
 
             {/* Text card */}
             <div
-              className="bg-gray-50 dark:bg-gray-900 p-8 rounded-2xl shadow-sm flex flex-col justify-between"
+              className="journal-panel p-7 sm:p-9 flex flex-col justify-between"
               data-aos="fade-left"
               data-aos-delay="100"
             >
@@ -179,7 +181,7 @@ export default function Home() {
               <div className="mt-8 text-center md:text-left">
                 <Link
                   to="/impact"
-                  className="inline-flex items-center px-6 py-3 rounded-full bg-primary-600 text-white font-semibold shadow-lg hover:bg-primary-700 hover:shadow-xl motion-safe:transition-all duration-300"
+                  className="inline-flex items-center px-6 py-3 rounded-md bg-coral text-white font-semibold shadow hover:bg-coral-800 motion-safe:transition-all duration-300"
                 >
                   Explore More Impact Stories
                   <svg

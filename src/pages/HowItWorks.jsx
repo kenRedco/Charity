@@ -43,10 +43,10 @@ export default function HowItWorks() {
         path="/process"
       />
       {/* Hero Section */}
-      <section className="relative py-28 px-6 bg-green-700 text-center text-white">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative z-10">
-          <h1 className="text-5xl md:text-6xl font-extrabold" data-aos="fade-up">The Journey of Your Donation</h1>
+      <section className="page-hero px-6 py-24 sm:py-28 text-center text-white">
+        <div className="relative z-10 mx-auto max-w-4xl">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-coral-200">A clear path, every step</p>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight" data-aos="fade-up">The Journey of Your Donation</h1>
           <p className="max-w-3xl mx-auto mt-4 text-lg opacity-90" data-aos="fade-up" data-aos-delay="100">
             We believe in radical transparency. Follow every step of the process, from your wallet to the hands of those you support.
           </p>
@@ -54,7 +54,7 @@ export default function HowItWorks() {
       </section>
 
       {/* Timeline Section */}
-      <section className="py-24 px-6">
+      <section className="py-20 sm:py-24 px-6 bg-paper dark:bg-gray-950">
         <div className="max-w-3xl mx-auto">
           <div className="relative">
             {/* The vertical line */}

@@ -1,3 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+	font-family: 'DM Sans', sans-serif;
+	color: #183c31;
+	background: #f7f7f0;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	--paper: #f7f7f0;
+	--ink: #183c31;
+	--forest: #164b3c;
+	--leaf: #2d7657;
+	--coral: #e8795b;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 5rem;
+}
+
+body {
+	min-width: 320px;
+	margin: 0;
+	background: var(--paper);
+}
+
+::selection {
+	color: #fff;
+	background: var(--leaf);
+}
+
+:focus-visible {
+	outline: 3px solid var(--coral);
+	outline-offset: 3px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	font-family: 'DM Serif Display', Georgia, serif;
+	font-weight: 400;
+	letter-spacing: 0;
+}
+
+@layer components {
+	.page-hero {
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
+		background-color: var(--forest);
+		background-image: repeating-linear-gradient(135deg, transparent 0 22px, rgb(255 255 255 / 3%) 22px 23px);
+	}
+
+	.page-hero::after {
+		position: absolute;
+		z-index: -1;
+		right: max(1.5rem, calc((100vw - 72rem) / 2));
+		bottom: -3.5rem;
+		width: 9rem;
+		height: 9rem;
+		border: 1px solid rgb(255 255 255 / 20%);
+		border-radius: 50%;
+		box-shadow: 0 0 0 1.25rem rgb(255 255 255 / 5%), 0 0 0 2.5rem rgb(255 255 255 / 4%);
+		content: '';
+	}
+
+	.journal-panel {
+		border: 1px solid rgb(22 75 60 / 10%);
+		border-radius: 0.75rem;
+		background: #fff;
+		box-shadow: 0 12px 35px rgb(24 60 49 / 7%);
+	}
+
+	.dark .journal-panel {
+		border-color: rgb(255 255 255 / 10%);
+		background: #1f2937;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}

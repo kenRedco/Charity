@@ -4,6 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
+        paper: '#f7f7f0',
+        ink: '#183c31',
+        forest: '#164b3c',
+        leaf: '#2d7657',
+        coral: {
+          50: '#fff3ef',
+          100: '#ffe1d8',
+          200: '#ffc1ae',
+          DEFAULT: '#e8795b',
+          800: '#9e432e',
+        },
         primary: {
           50:  '#ecfdf5',
           100: '#d1fae5',

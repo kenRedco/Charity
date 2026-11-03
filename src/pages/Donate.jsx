@@ -182,7 +182,7 @@ export default function Donate() {
             <h2 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-2">Give directly, on-chain.</h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">Choose a cryptocurrency, review its network and recipient, then confirm the payment in your wallet.</p>
 
-            <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700" data-aos="fade-up">
+            <div className="journal-panel p-6 sm:p-8" data-aos="fade-up">
               <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Make a donation</h3>
               <p className="text-gray-600 dark:text-gray-300 mt-1 mb-6">Select a currency and enter an optional amount.</p>
               <fieldset>
@@ -224,7 +224,7 @@ export default function Donate() {
                 type="button"
                 onClick={handleDonate}
                 disabled={!amountBaseUnits || !amountFitsWalletApi || sending}
-                className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-md bg-primary-600 px-5 py-3 font-semibold text-white transition hover:bg-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-800 disabled:cursor-not-allowed disabled:bg-gray-300 dark:disabled:bg-gray-600"
+                className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-md bg-coral px-5 py-3 font-semibold text-white transition hover:bg-coral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-800 disabled:cursor-not-allowed disabled:bg-gray-300 dark:disabled:bg-gray-600"
               >
                 <FaWallet aria-hidden="true" />
                 {sending ? 'Check your wallet...' : `Continue with ${currency.name} wallet`}
@@ -244,7 +244,7 @@ export default function Donate() {
             </div>
 
             {currency.address && (
-              <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 mt-8" data-aos="fade-up" data-aos-delay="100">
+              <div className="journal-panel p-6 sm:p-8 mt-8" data-aos="fade-up" data-aos-delay="100">
                 <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">Or send from any wallet</h3>
                 <p className="text-gray-600 dark:text-gray-300 mt-1 mb-5">Scan the payment request or copy the recipient address.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">

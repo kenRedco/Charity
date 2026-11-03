@@ -86,7 +86,7 @@ const STORIES = [
 ------------------------------------------------------------ */
 const StoryCard = ({ s, index }) => (
   <Reveal delay={index * 100}>
-    <article tabIndex="0" className="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-sm ring-1 ring-black/5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 transition-shadow">
+    <article tabIndex="0" className="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-sm ring-1 ring-forest/10 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral transition-shadow">
       {/* Image */}
       <div className="aspect-[4/3] w-full overflow-hidden">
         <img
@@ -99,7 +99,7 @@ const StoryCard = ({ s, index }) => (
 
       {/* Top-left badge */}
       <div className="absolute top-3 left-3">
-        <span className="inline-block rounded-full bg-black/60 text-white text-xs font-semibold px-3 py-1 backdrop-blur-sm">
+        <span className="inline-block rounded-sm bg-forest text-white text-xs font-semibold px-3 py-1.5">
           {s.badge}
         </span>
       </div>
@@ -127,10 +127,10 @@ export default function Impact() {
         path="/impact"
       />
   {/* Header */}
-  <section className="relative py-28 px-6 text-white bg-green-700 text-center">
-  <div className="absolute inset-0 bg-black/20"></div>
+  <section className="page-hero px-6 py-24 sm:py-28 text-white text-center">
   <div className="relative z-10 max-w-4xl mx-auto">
-    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight" data-aos="fade-up">
+    <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-coral-200" data-aos="fade-up">People, showing up for people</p>
+    <h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight" data-aos="fade-up">
       Real Impact, Direct to Families
     </h1>
     <p
@@ -146,7 +146,7 @@ export default function Impact() {
 
 
       {/* Stories grid */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-900">
+      <section className="py-16 sm:py-20 bg-paper dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {STORIES.map((s, i) => (
             <StoryCard key={s.title} s={s} index={i} />
@@ -155,7 +155,7 @@ export default function Impact() {
       </section>
 
       {/* Feature block with square vendor image & animated layout */}
-      <section className="py-10">
+      <section className="py-14 sm:py-20">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
           <Reveal className="order-2 md:order-1">
             <div>
@@ -168,7 +168,7 @@ export default function Impact() {
               <div className="mt-6 flex gap-3">
                 <Link
                   to="/donate"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-green-600 text-white font-semibold hover:bg-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950 transition"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-md bg-coral text-white font-semibold hover:bg-coral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950 transition"
                 >
                   Donate now
                 </Link>

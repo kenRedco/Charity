@@ -22,10 +22,10 @@ export default function About() {
         path="/about"
       />
       {/* Hero Section */}
-      <section className="relative py-28 px-6 text-white bg-green-700 text-center">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative z-10">
-          <h1 className="text-5xl md:text-6xl font-extrabold" data-aos="fade-up">We believe in aid rooted in dignity.</h1>
+      <section className="page-hero px-6 py-24 sm:py-28 text-white text-center">
+        <div className="relative z-10 mx-auto max-w-4xl">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-coral-200" data-aos="fade-up">Our purpose</p>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight" data-aos="fade-up">We believe in aid rooted in dignity.</h1>
           <p className="max-w-3xl mx-auto mt-4 text-lg opacity-90" data-aos="fade-up" data-aos-delay="100">
             Poverty is a lack of cash, not a lack of character. We provide a direct, efficient, and transparent path for your donation to empower people in need.
           </p>
@@ -33,7 +33,7 @@ export default function About() {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-900">
+      <section className="py-20 sm:py-24 bg-paper dark:bg-gray-900">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <div data-aos="fade-right">
             <FiTarget className="text-green-600 dark:text-green-400 h-12 w-12 mb-4" />
@@ -53,7 +53,7 @@ export default function About() {
       </section>
 
       {/* Why Crypto Section */}
-      <section className="py-24 bg-white dark:bg-gray-950">
+      <section className="py-20 sm:py-24 bg-white dark:bg-gray-950">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-4" data-aos="fade-up">The Crypto Advantage</h2>
           <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-delay="100">
@@ -80,7 +80,7 @@ export default function About() {
       </section>
       
       {/* Team Section */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-900">
+      <section className="py-20 sm:py-24 bg-paper dark:bg-gray-900">
           <div className="max-w-6xl mx-auto px-6 text-center">
               <h2 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-12" data-aos="fade-up">Meet Our Team</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
@@ -96,7 +96,7 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="bg-green-700">
+      <section className="bg-forest border-t-4 border-coral">
         <div className="max-w-4xl mx-auto text-center py-20 px-6">
             <h2 className="text-4xl font-extrabold text-white mb-4" data-aos="fade-up">Ready to be part of the change?</h2>
             <div className="mt-8" data-aos="fade-up" data-aos-delay="100">
