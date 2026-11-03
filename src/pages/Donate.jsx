@@ -176,7 +176,7 @@ export default function Donate() {
             src={classroomPhoto}
             alt="Children gathered in a colorful classroom as their teacher holds a violin"
             className="absolute h-full w-full object-cover"
-            loading="lazy"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-green-800/60 flex flex-col justify-end p-12 text-white">
             <h1 className="text-5xl font-extrabold leading-tight" data-aos="fade-up">

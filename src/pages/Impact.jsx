@@ -18,6 +18,10 @@ const Reveal = ({ children, className = "", delay = 0 }) => {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (!('IntersectionObserver' in window)) {
+      setVisible(true);
+      return;
+    }
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -38,7 +42,7 @@ const Reveal = ({ children, className = "", delay = 0 }) => {
         "motion-safe:transition-all motion-safe:duration-[900ms]",
         visible
           ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-6",
+          : "opacity-100 translate-y-0",
         className,
       ].join(" ")}
     >

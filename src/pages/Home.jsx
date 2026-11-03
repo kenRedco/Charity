@@ -56,8 +56,8 @@ export default function Home() {
       {/* --- Hero Section --- */}
       <section className="relative h-[84svh] min-h-[620px] flex items-center text-white">
         <div className="absolute inset-0">
-          <img src={clothingDrive} alt="Neighbors gather around donated clothing at an outdoor community drive" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/10"></div>
+          <img src={clothingDrive} alt="Neighbors gather around donated clothing at an outdoor community drive" className="w-full h-full object-cover object-center" fetchPriority="high" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent"></div>
         </div>
         <div className="relative z-10 max-w-5xl mx-auto text-center px-6 pt-16">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-coral-200" data-aos="fade-up">Dignity, in every gesture</p>
@@ -140,7 +140,7 @@ export default function Home() {
                 src={toyDrive}
                 alt="Children explore donated toys and play materials at a community distribution"
                 className="absolute inset-0 w-full h-full object-cover object-center motion-safe:transition-transform motion-safe:duration-700 group-hover:scale-[1.03]"
-                loading="lazy"
+                loading="eager"
               />
 
               {/* Gradient overlay */}
