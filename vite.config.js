@@ -5,7 +5,7 @@ export default defineConfig({
   base: '/Charity/',
   plugins: [react()],
   ssgOptions: {
-    script: 'async',
+    script: 'defer',
     dirStyle: 'nested', // /donate → /donate/index.html (cleaner URLs)
     includedRoutes: () => [
       '/',
