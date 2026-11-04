@@ -4,18 +4,34 @@ import usePageTitle from '../hooks/usePageTitle';
 import PageMeta from '../components/PageMeta';
 import QRCode from 'react-qr-code';
 import { FiCopy, FiCheckCircle, FiHelpCircle, FiExternalLink } from 'react-icons/fi';
-import { FaCoins, FaWallet } from 'react-icons/fa';
+import { FaWallet } from 'react-icons/fa';
 import { SiBitcoin, SiEthereum, SiSolana } from 'react-icons/si';
 import { Connection, PublicKey, SystemProgram, Transaction } from '@solana/web3.js';
 import classroomPhoto from '../assets/45F86866-96E5-4138-8618-B78B3BB6D5A5.png';
 import { DONATION_CURRENCIES } from '../config';
 
+function TronMark({ className }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path fill="#C4342B" fillRule="evenodd" clipRule="evenodd" d="M4.418 3.186a.56.56 0 0 1 .553-.17l11.904 2.915q.108.027.198.092l2.422 1.765a.564.564 0 0 1 .133.774l-8.332 12.192a.563.563 0 0 1-.998-.13L4.306 3.754a.56.56 0 0 1 .112-.568m1.965 3.045 4.16 11.711.684-6.07zm5.957 5.838-.695 6.175 5.884-8.61zm5.72-3.93-3.793 1.78 2.543-2.692zm-2.395-1.343L6.41 4.53l5.426 6.32z" />
+    </svg>
+  );
+}
+
+function XrpMark({ className }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.36 4.125h2.605l-5.42 5.781A4.92 4.92 0 0 1 12 11.443a4.9 4.9 0 0 1-3.546-1.537L3.026 4.125H5.64l4.112 4.429c1.204 1.277 3.291 1.277 4.496 0zM5.604 19.865H3l5.453-5.763a4.93 4.93 0 0 1 3.55-1.537 4.92 4.92 0 0 1 3.552 1.538L21 19.875h-2.605l-4.138-4.411c-1.205-1.277-3.291-1.277-4.496 0z" />
+    </svg>
+  );
+}
+
 const CURRENCY_MARKS = {
   ETH: { Icon: SiEthereum, color: '#627eea', background: 'bg-[#627eea]/10' },
   BTC: { Icon: SiBitcoin, color: '#f7931a', background: 'bg-[#f7931a]/10' },
   SOL: { Icon: SiSolana, color: '#14a979', background: 'bg-[#14a979]/10' },
-  TRX: { Icon: FaCoins, color: '#ef0027', background: 'bg-[#ef0027]/10' },
-  XRP: { Icon: FaCoins, color: '#23292f', background: 'bg-[#23292f]/10' },
+  TRX: { Icon: TronMark, color: '#c4342b', background: 'bg-[#c4342b]/10' },
+  XRP: { Icon: XrpMark, color: '#23292f', background: 'bg-[#23292f]/10' },
 };
 
 function amountToBaseUnits(amount, decimals) {
@@ -24,6 +40,10 @@ function amountToBaseUnits(amount, decimals) {
   if (fraction.length > decimals) return '';
   const units = BigInt(whole) * 10n ** BigInt(decimals) + BigInt(fraction.padEnd(decimals, '0'));
   return units > 0n ? units.toString() : '';
+}
+
+function createXrpPaymentUri(address, amount) {
+  return `ripple:${address}?amount=${encodeURIComponent(amount)}`;
 }
 
 export default function Donate() {
@@ -38,6 +58,7 @@ export default function Donate() {
   const currency = DONATION_CURRENCIES[currencyCode];
   const amountBaseUnits = amountToBaseUnits(amount, currency.decimals);
   const amountFitsWalletApi = currencyCode === 'ETH' || (amountBaseUnits && BigInt(amountBaseUnits) <= BigInt(Number.MAX_SAFE_INTEGER));
+  const xrpPaymentUri = createXrpPaymentUri(currency.address, amount);
   const explorerUrls = {
     ETH: 'https://etherscan.io/tx/',
     BTC: 'https://mempool.space/tx/',
@@ -69,7 +90,12 @@ export default function Donate() {
     if (!amountBaseUnits || !amountFitsWalletApi) return;
 
     if (currencyCode === 'XRP') {
-      setError('To send XRP, scan the QR code or copy the address below, then enter the amount in your XRP Ledger wallet. Confirm the XRP Ledger network before sending.');
+      window.location.assign(xrpPaymentUri);
+      window.setTimeout(() => {
+        if (!document.hidden) {
+          setError('No XRP wallet opened. Scan the XRP payment QR code or copy the address below to continue.');
+        }
+      }, 1200);
       return;
     }
 
@@ -157,6 +183,9 @@ export default function Donate() {
     }
     if (currency.qrScheme === 'solana') {
       return `solana:${currency.address}${amountBaseUnits ? `?amount=${encodeURIComponent(amount)}` : ''}`;
+    }
+    if (currencyCode === 'XRP' && amountBaseUnits) {
+      return xrpPaymentUri;
     }
     return currency.address;
   })();
@@ -252,7 +281,7 @@ export default function Donate() {
                 className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-md bg-coral px-5 py-3 font-semibold text-white transition hover:bg-coral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-800 disabled:cursor-not-allowed disabled:bg-gray-300 dark:disabled:bg-gray-600"
               >
                 <FaWallet aria-hidden="true" />
-                {sending ? 'Check your wallet...' : currencyCode === 'XRP' ? 'View XRP payment instructions' : `Continue with ${currency.name} wallet`}
+                {sending ? 'Check your wallet...' : `Continue with ${currency.name} wallet`}
               </button>
               {error && <p className="mt-4 text-sm text-red-700 dark:text-red-300" role="alert">{error}</p>}
               {transactionHash && (
@@ -273,7 +302,7 @@ export default function Donate() {
                 <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">Or send from any wallet</h3>
                 <p className="text-gray-600 dark:text-gray-300 mt-1 mb-5">Scan the payment request or copy the recipient address.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
-                  <div className="p-2 bg-white border border-gray-200 dark:border-gray-600 rounded-lg aspect-square flex items-center justify-center">
+                  <div data-payment-request={qrCodeValue} className="p-2 bg-white border border-gray-200 dark:border-gray-600 rounded-lg aspect-square flex items-center justify-center">
                     <ClientOnly fallback={<div className="w-full h-full bg-gray-100 rounded animate-pulse" />}>
                       {() => <QRCode value={qrCodeValue} size={192} style={{ height: 'auto', maxWidth: '100%', width: '100%' }} />}
                     </ClientOnly>
@@ -288,7 +317,7 @@ export default function Donate() {
                     <code className="block break-all bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-200 p-3 rounded-md text-sm font-mono">{currency.address}</code>
                     <div className="mt-4 flex items-start gap-3 bg-blue-50 dark:bg-blue-950 text-blue-800 dark:text-blue-200 p-3 rounded-lg">
                       <FiHelpCircle className="h-5 w-5 mt-0.5 flex-shrink-0" aria-hidden="true" />
-                      <p className="text-sm">Only send {currency.ticker} on {currency.network}. {currencyCode === 'TRX' || currencyCode === 'XRP' ? 'The QR contains the recipient address; enter the amount in your wallet.' : 'Confirm the recipient and network in your wallet before approving.'}</p>
+                      <p className="text-sm">Only send {currency.ticker} on {currency.network}. {currencyCode === 'XRP' ? 'The payment QR includes the recipient and amount.' : currencyCode === 'TRX' ? 'The QR contains the recipient address; enter the amount in your wallet.' : 'Confirm the recipient and network in your wallet before approving.'}</p>
                     </div>
                   </div>
                 </div>
