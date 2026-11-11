@@ -7,6 +7,8 @@ import waterSupplies from "../assets/51D63461-C729-45FD-B988-4A81DD572E59.png";
 import waterDistribution from "../assets/647E7D86-87E3-4861-AD0E-6CAB18A7A7DE.png";
 import reliefPackages from "../assets/9EC4E8E6-8101-483E-8D6C-170B375FCAB2.jpeg";
 import impactFilm from "../assets/VIDEO-2026-11-11-13-07-20.mp4";
+import communityFilm from "../assets/VIDEO-2026-11-11-15-29-04.mp4";
+import careFilm from "../assets/VIDEO-2026-11-11-15-29-05.mp4";
 
 /* ------------------------------------------------------------
    A tiny "Reveal" component (intersection observer)
@@ -86,6 +88,27 @@ const STORIES = [
   },
 ];
 
+const IMPACT_FILMS = [
+  {
+    src: impactFilm,
+    title: "Every act of care has a human story.",
+    label: "The full story",
+    detail: "See neighbors show up for one another with practical support and shared effort.",
+  },
+  {
+    src: communityFilm,
+    title: "Care in the everyday.",
+    label: "A community moment",
+    detail: "A short glimpse of people coming together to support their community.",
+  },
+  {
+    src: careFilm,
+    title: "Support, shared together.",
+    label: "Everyday care",
+    detail: "Small moments of care can make a meaningful difference.",
+  },
+];
+
 /* ------------------------------------------------------------
    Card with hover overlay
 ------------------------------------------------------------ */
@@ -124,6 +147,9 @@ const StoryCard = ({ s, index }) => (
    Page component
 ------------------------------------------------------------ */
 export default function Impact() {
+  const [selectedFilmIndex, setSelectedFilmIndex] = useState(0);
+  const selectedFilm = IMPACT_FILMS[selectedFilmIndex];
+
   return (
     <div className="bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-100">
       <PageMeta
@@ -174,18 +200,49 @@ export default function Impact() {
             </p>
           </Reveal>
 
-          <Reveal delay={120} className="mx-auto mt-10 max-w-[32rem] sm:mt-14">
+          <Reveal delay={120} className="mx-auto mt-10 max-w-[36rem] sm:mt-14">
+            <div className="mb-4 grid grid-cols-1 gap-2 sm:grid-cols-3" role="group" aria-label="Choose a community story video">
+              {IMPACT_FILMS.map((film, index) => {
+                const isSelected = selectedFilmIndex === index;
+
+                return (
+                  <button
+                    key={film.src}
+                    type="button"
+                    aria-pressed={isSelected}
+                    onClick={() => setSelectedFilmIndex(index)}
+                    className={`rounded-xl border px-4 py-3 text-left transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 focus-visible:ring-offset-forest ${
+                      isSelected
+                        ? "border-sage/60 bg-sage/15 text-white shadow-lg"
+                        : "border-white/15 bg-white/[0.04] text-white/75 hover:border-white/35 hover:bg-white/[0.08] hover:text-white"
+                    }`}
+                  >
+                    <span className="block text-[0.65rem] font-bold uppercase tracking-[0.16em] text-sage">
+                      Story {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="mt-1 block text-sm font-semibold">{film.label}</span>
+                  </button>
+                );
+              })}
+            </div>
             <div className="overflow-hidden rounded-2xl border border-white/15 bg-black shadow-[0_30px_90px_rgba(0,0,0,0.38)] ring-1 ring-white/5 sm:rounded-3xl">
               <video
+                key={selectedFilm.src}
                 className="block aspect-[3/4] w-full bg-black object-contain"
                 controls
                 playsInline
                 preload="metadata"
-                aria-label="Community relief and neighbors supporting one another"
+                aria-label={selectedFilm.title}
               >
-                <source src={impactFilm} type="video/mp4" />
+                <source src={selectedFilm.src} type="video/mp4" />
                 Your browser does not support embedded videos.
               </video>
+            </div>
+            <div aria-live="polite" className="px-2 pt-5 text-center sm:px-4">
+              <p className="text-xl font-semibold text-white sm:text-2xl">{selectedFilm.title}</p>
+              <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-white/70 sm:text-base">
+                {selectedFilm.detail}
+              </p>
             </div>
           </Reveal>
 
