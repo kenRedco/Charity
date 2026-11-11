@@ -148,7 +148,33 @@ const StoryCard = ({ s, index }) => (
 ------------------------------------------------------------ */
 export default function Impact() {
   const [selectedFilmIndex, setSelectedFilmIndex] = useState(0);
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
+  const filmVideoRef = useRef(null);
   const selectedFilm = IMPACT_FILMS[selectedFilmIndex];
+
+  useEffect(() => {
+    const video = filmVideoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.muted = true;
+          setAutoplayBlocked(false);
+          video.play().then(
+            () => setAutoplayBlocked(false),
+            () => setAutoplayBlocked(true)
+          );
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [selectedFilm.src]);
 
   return (
     <div className="bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-100">
@@ -228,9 +254,11 @@ export default function Impact() {
             <div className="overflow-hidden rounded-2xl border border-white/15 bg-black shadow-[0_30px_90px_rgba(0,0,0,0.38)] ring-1 ring-white/5 sm:rounded-3xl">
               <video
                 key={selectedFilm.src}
+                ref={filmVideoRef}
                 className="block aspect-[3/4] w-full bg-black object-contain"
                 controls
                 playsInline
+                muted
                 preload="metadata"
                 aria-label={selectedFilm.title}
               >
@@ -238,6 +266,11 @@ export default function Impact() {
                 Your browser does not support embedded videos.
               </video>
             </div>
+            {autoplayBlocked && (
+              <p className="mt-3 text-center text-sm text-white/75" role="status">
+                Tap play to watch this video.
+              </p>
+            )}
             <div aria-live="polite" className="px-2 pt-5 text-center sm:px-4">
               <p className="text-xl font-semibold text-white sm:text-2xl">{selectedFilm.title}</p>
               <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-white/70 sm:text-base">
