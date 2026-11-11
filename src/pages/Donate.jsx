@@ -56,6 +56,7 @@ export default function Donate() {
   const [error, setError] = useState('');
 
   const currency = DONATION_CURRENCIES[currencyCode];
+  const { Icon: CurrencyIcon, color: currencyColor, background: currencyBackground } = CURRENCY_MARKS[currencyCode];
   const amountBaseUnits = amountToBaseUnits(amount, currency.decimals);
   const amountFitsWalletApi = currencyCode === 'ETH' || (amountBaseUnits && BigInt(amountBaseUnits) <= BigInt(Number.MAX_SAFE_INTEGER));
   const xrpPaymentUri = createXrpPaymentUri(currency.address, amount);
@@ -302,10 +303,15 @@ export default function Donate() {
                 <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">Or send from any wallet</h3>
                 <p className="text-gray-600 dark:text-gray-300 mt-1 mb-5">Scan the payment request or copy the recipient address.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
-                  <div data-payment-request={qrCodeValue} className="p-2 bg-white border border-gray-200 dark:border-gray-600 rounded-lg aspect-square flex items-center justify-center">
-                    <ClientOnly fallback={<div className="w-full h-full bg-gray-100 rounded animate-pulse" />}>
-                      {() => <QRCode value={qrCodeValue} size={192} style={{ height: 'auto', maxWidth: '100%', width: '100%' }} />}
+                  <div data-payment-request={qrCodeValue} className="relative flex aspect-square items-center justify-center rounded-lg border border-gray-200 bg-white p-2 dark:border-gray-600">
+                    <ClientOnly fallback={<div className="h-full w-full animate-pulse rounded bg-gray-100" />}>
+                      {() => <QRCode value={qrCodeValue} size={192} level="H" style={{ height: 'auto', maxWidth: '100%', width: '100%' }} />}
                     </ClientOnly>
+                    <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-lg bg-white p-1.5 shadow-sm" aria-hidden="true">
+                      <span className={`flex h-full w-full items-center justify-center rounded-md ${currencyBackground}`}>
+                        <CurrencyIcon className="h-6 w-6" style={{ color: currencyColor }} />
+                      </span>
+                    </span>
                   </div>
                   <div className="sm:col-span-2">
                     <div className="flex items-center justify-between mb-2">
