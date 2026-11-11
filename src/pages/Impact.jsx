@@ -6,6 +6,7 @@ import classroom from "../assets/45F86866-96E5-4138-8618-B78B3BB6D5A5.png";
 import waterSupplies from "../assets/51D63461-C729-45FD-B988-4A81DD572E59.png";
 import waterDistribution from "../assets/647E7D86-87E3-4861-AD0E-6CAB18A7A7DE.png";
 import reliefPackages from "../assets/9EC4E8E6-8101-483E-8D6C-170B375FCAB2.jpeg";
+import impactFilm from "../assets/VIDEO-2026-11-11-13-07-20.mp4";
 
 /* ------------------------------------------------------------
    A tiny "Reveal" component (intersection observer)
@@ -42,7 +43,7 @@ const Reveal = ({ children, className = "", delay = 0 }) => {
         "motion-safe:transition-all motion-safe:duration-[900ms]",
         visible
           ? "opacity-100 translate-y-0"
-          : "opacity-100 translate-y-0",
+          : "motion-safe:opacity-0 motion-safe:translate-y-6",
         className,
       ].join(" ")}
     >
@@ -147,6 +148,65 @@ export default function Impact() {
   </div>
 </section>
 
+
+
+      {/* Community story film */}
+      <section
+        aria-labelledby="impact-film-title"
+        className="relative isolate overflow-hidden bg-forest py-16 text-white sm:py-24"
+      >
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_15%_20%,rgba(220,232,218,0.12),transparent_35%),radial-gradient(ellipse_at_90%_85%,rgba(217,119,88,0.12),transparent_32%)]"
+        />
+        <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
+          <Reveal className="mx-auto max-w-3xl text-center">
+            <p className="eyebrow text-sage">A closer look at community care</p>
+            <h2
+              id="impact-film-title"
+              className="mt-4 text-3xl leading-tight text-white sm:text-4xl md:text-5xl"
+            >
+              Every act of care has a human story.
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
+              See neighbors show up for one another with practical support, shared
+              effort, and the small moments that make a lasting difference.
+            </p>
+          </Reveal>
+
+          <Reveal delay={120} className="mx-auto mt-10 max-w-[32rem] sm:mt-14">
+            <div className="overflow-hidden rounded-2xl border border-white/15 bg-black shadow-[0_30px_90px_rgba(0,0,0,0.38)] ring-1 ring-white/5 sm:rounded-3xl">
+              <video
+                className="block aspect-[3/4] w-full bg-black object-contain"
+                controls
+                playsInline
+                preload="metadata"
+                aria-label="Community relief and neighbors supporting one another"
+              >
+                <source src={impactFilm} type="video/mp4" />
+                Your browser does not support embedded videos.
+              </video>
+            </div>
+          </Reveal>
+
+          <Reveal delay={220} className="mx-auto mt-8 max-w-4xl text-center sm:mt-10">
+            <p className="text-sm leading-relaxed text-white/70 sm:text-base">
+              From everyday essentials to moments of learning and connection,
+              meaningful support starts with people and reaches them directly.
+            </p>
+            <div className="mt-5 flex flex-wrap justify-center gap-2">
+              {["Everyday essentials", "Learning & play", "Neighbors helping neighbors"].map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-xs font-medium tracking-wide text-sage sm:text-sm"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
 
       {/* Stories grid */}
