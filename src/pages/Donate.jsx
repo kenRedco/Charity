@@ -7,7 +7,6 @@ import { FiCopy, FiCheckCircle, FiHelpCircle, FiExternalLink } from 'react-icons
 import { FaWallet } from 'react-icons/fa';
 import { SiBitcoin, SiEthereum, SiSolana } from 'react-icons/si';
 import { Connection, PublicKey, SystemProgram, Transaction } from '@solana/web3.js';
-import classroomPhoto from '../assets/45F86866-96E5-4138-8618-B78B3BB6D5A5.png';
 import { DONATION_CURRENCIES } from '../config';
 
 function TronMark({ className }) {
@@ -200,19 +199,109 @@ export default function Donate() {
       />
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 min-h-screen bg-gray-50 dark:bg-gray-900">
 
-        {/* Left Side - Image & Mission */}
-        <div className="relative hidden lg:block">
-          <img
-            src={classroomPhoto}
-            alt="Children gathered in a colorful classroom as their teacher holds a violin"
-            className="absolute h-full w-full object-cover"
-            fetchPriority="high"
-          />
-          <div className="absolute inset-0 bg-green-800/60 flex flex-col justify-end p-12 text-white">
-            <h1 className="text-5xl font-extrabold leading-tight" data-aos="fade-up">
+        {/* Left Side - Global generosity artwork & mission */}
+        <div className="relative hidden min-h-screen overflow-hidden bg-[#102e26] lg:block">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_36%,rgba(102,136,115,0.42),transparent_42%),linear-gradient(155deg,#1d5140_0%,#123b30_50%,#102e26_100%)]" />
+          <svg
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full"
+            viewBox="0 0 900 1100"
+            preserveAspectRatio="xMidYMid slice"
+            fill="none"
+          >
+            <defs>
+              <radialGradient id="globeGlow" cx="0" cy="0" r="1" gradientTransform="matrix(0 410 -410 0 450 370)" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#F4B77B" stopOpacity=".34" />
+                <stop offset=".52" stopColor="#8FB79A" stopOpacity=".15" />
+                <stop offset="1" stopColor="#8FB79A" stopOpacity="0" />
+              </radialGradient>
+              <radialGradient id="globeSurface" cx="0" cy="0" r="1" gradientTransform="matrix(330 355 -355 330 320 205)" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#DCE8DA" stopOpacity=".28" />
+                <stop offset=".56" stopColor="#8FB79A" stopOpacity=".12" />
+                <stop offset="1" stopColor="#164536" stopOpacity=".16" />
+              </radialGradient>
+              <linearGradient id="globeRim" x1="258" x2="653" y1="180" y2="618" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#F2C18C" stopOpacity=".82" />
+                <stop offset=".46" stopColor="#DCE8DA" stopOpacity=".48" />
+                <stop offset="1" stopColor="#8FB79A" stopOpacity=".12" />
+              </linearGradient>
+              <linearGradient id="networkLine" x1="220" x2="700" y1="240" y2="650" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#F2C18C" stopOpacity=".88" />
+                <stop offset="1" stopColor="#DCE8DA" stopOpacity=".25" />
+              </linearGradient>
+              <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="9" />
+              </filter>
+              <clipPath id="globeClip">
+                <circle cx="450" cy="396" r="205" />
+              </clipPath>
+            </defs>
+
+            <circle cx="450" cy="396" r="355" fill="url(#globeGlow)" />
+            <circle cx="450" cy="396" r="278" stroke="#DCE8DA" strokeOpacity=".09" />
+            <circle cx="450" cy="396" r="244" stroke="#DCE8DA" strokeOpacity=".12" strokeDasharray="2 12" />
+            <circle cx="450" cy="396" r="205" fill="url(#globeSurface)" stroke="url(#globeRim)" strokeWidth="1.5" />
+
+            <g clipPath="url(#globeClip)" stroke="#DCE8DA" strokeOpacity=".28">
+              <ellipse cx="450" cy="396" rx="88" ry="205" />
+              <ellipse cx="450" cy="396" rx="158" ry="205" />
+              <path d="M239 396h422M260 326c102 54 278 54 380 0M260 466c102-54 278-54 380 0M294 257c91 49 221 49 312 0M294 535c91-49 221-49 312 0" />
+              <path d="M282 298c41 18 64 48 69 84-37 23-61 52-67 88m216-211c-35 28-50 58-43 92 44 14 75 37 96 71-15 35-20 69-11 103" stroke="#A8C6AA" strokeOpacity=".42" />
+            </g>
+
+            <g stroke="url(#networkLine)" strokeWidth="1.4">
+              <path d="m209 270 82 48 54-91 105 63 81-104 82 111 91-25M188 481l99-49 58 86 103-58 88 102 73-81 83 32M291 318l-4 114m58-205 14 291m91-228 0 170m81-274 7 332m75-221-2 140" />
+              <path d="M291 318 450 396l81-209m-244 294 163-85 176 44 73-81" strokeOpacity=".44" />
+            </g>
+            <g fill="#F2C18C">
+              <circle cx="209" cy="270" r="4" />
+              <circle cx="291" cy="318" r="5" />
+              <circle cx="345" cy="227" r="4" />
+              <circle cx="450" cy="290" r="5" />
+              <circle cx="531" cy="187" r="4" />
+              <circle cx="613" cy="298" r="5" />
+              <circle cx="704" cy="273" r="4" />
+              <circle cx="188" cy="481" r="4" />
+              <circle cx="287" cy="432" r="5" />
+              <circle cx="345" cy="518" r="4" />
+              <circle cx="450" cy="460" r="5" />
+              <circle cx="538" cy="562" r="4" />
+              <circle cx="611" cy="481" r="5" />
+              <circle cx="694" cy="513" r="4" />
+            </g>
+            <g fill="#F2C18C" filter="url(#softGlow)" opacity=".55">
+              <circle cx="291" cy="318" r="7" />
+              <circle cx="450" cy="290" r="7" />
+              <circle cx="613" cy="298" r="7" />
+              <circle cx="287" cy="432" r="7" />
+              <circle cx="450" cy="460" r="7" />
+              <circle cx="611" cy="481" r="7" />
+            </g>
+
+            <g className="motion-safe:origin-center motion-safe:animate-[spin_90s_linear_infinite]" style={{ transformOrigin: '450px 396px' }}>
+              <circle cx="450" cy="396" r="247" stroke="#F2C18C" strokeOpacity=".32" strokeDasharray="1 9" />
+              <circle cx="450" cy="149" r="5" fill="#F2C18C" />
+              <circle cx="697" cy="396" r="3" fill="#DCE8DA" fillOpacity=".8" />
+            </g>
+
+            <g transform="translate(356 632)">
+              <rect width="188" height="56" rx="28" fill="#F6F4EB" fillOpacity=".08" stroke="#DCE8DA" strokeOpacity=".2" />
+              <circle cx="30" cy="28" r="13" fill="#D97758" fillOpacity=".9" />
+              <path d="M30 34s-7-4.1-7-8.3a3.6 3.6 0 0 1 7-1.2 3.6 3.6 0 0 1 7 1.2C37 29.9 30 34 30 34Z" fill="#FFF6E9" />
+              <text x="54" y="33" fill="#F6F4EB" fontFamily="DM Sans, sans-serif" fontSize="12" letterSpacing="1.1">CARE, CONNECTED</text>
+            </g>
+          </svg>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#102e26] via-transparent to-[#102e26]/10" />
+          <div className="absolute left-10 top-10 flex items-center gap-3 text-sage/80 xl:left-14 xl:top-14">
+            <span className="h-px w-8 bg-coral/80" />
+            <span className="eyebrow">One world. More ways to care.</span>
+          </div>
+          <div className="absolute inset-x-0 bottom-0 flex flex-col justify-end p-10 text-white xl:p-14">
+            <p className="eyebrow mb-4 text-sage">A direct act of care</p>
+            <h1 className="max-w-xl text-5xl leading-[1.05] xl:text-6xl" data-aos="fade-up">
               Your Gift is the Beginning of Their Story.
             </h1>
-            <p className="mt-4 text-lg opacity-90 max-w-lg" data-aos="fade-up" data-aos-delay="100">
+            <p className="mt-4 max-w-lg text-lg leading-relaxed text-white/85" data-aos="fade-up" data-aos-delay="100">
               Your contribution goes to the recipient wallet shown here. Review the amount and network carefully before confirming.
             </p>
           </div>
