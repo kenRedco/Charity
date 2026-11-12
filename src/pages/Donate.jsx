@@ -191,17 +191,17 @@ export default function Donate() {
   })();
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900">
+    <div className="bg-paper dark:bg-gray-950">
       <PageMeta
         title="Donate Crypto — Give Directly to Families in Need"
         description="Send a cryptocurrency donation directly to the configured recipient wallet. Review the network, recipient, and amount before confirming in your wallet."
         path="/donate"
       />
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 min-h-screen bg-paper dark:bg-gray-950">
 
         {/* Left Side - Global generosity artwork & mission */}
-        <div className="relative hidden min-h-screen overflow-hidden bg-[#102e26] lg:block">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_36%,rgba(102,136,115,0.42),transparent_42%),linear-gradient(155deg,#1d5140_0%,#123b30_50%,#102e26_100%)]" />
+        <div className="relative hidden min-h-screen overflow-hidden bg-paper dark:bg-gray-950 lg:block">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_36%,rgba(102,136,115,0.2),transparent_42%),linear-gradient(155deg,#f6f4eb_0%,#edf1e8_50%,#f6f4eb_100%)] dark:bg-[radial-gradient(ellipse_at_50%_36%,rgba(102,136,115,0.28),transparent_42%),linear-gradient(155deg,#030712_0%,#030712_50%,#030712_100%)]" />
           <svg
             aria-hidden="true"
             className="absolute inset-0 h-full w-full"
@@ -242,11 +242,11 @@ export default function Donate() {
             <circle cx="450" cy="396" r="244" stroke="#DCE8DA" strokeOpacity=".12" strokeDasharray="2 12" />
             <circle cx="450" cy="396" r="205" fill="url(#globeSurface)" stroke="url(#globeRim)" strokeWidth="1.5" />
 
-            <g clipPath="url(#globeClip)" stroke="#DCE8DA" strokeOpacity=".28">
+            <g clipPath="url(#globeClip)" className="stroke-forest/25 dark:stroke-sage/30" strokeOpacity=".9">
               <ellipse cx="450" cy="396" rx="88" ry="205" />
               <ellipse cx="450" cy="396" rx="158" ry="205" />
               <path d="M239 396h422M260 326c102 54 278 54 380 0M260 466c102-54 278-54 380 0M294 257c91 49 221 49 312 0M294 535c91-49 221-49 312 0" />
-              <path d="M282 298c41 18 64 48 69 84-37 23-61 52-67 88m216-211c-35 28-50 58-43 92 44 14 75 37 96 71-15 35-20 69-11 103" stroke="#A8C6AA" strokeOpacity=".42" />
+              <path d="M282 298c41 18 64 48 69 84-37 23-61 52-67 88m216-211c-35 28-50 58-43 92 44 14 75 37 96 71-15 35-20 69-11 103" className="stroke-leaf/60 dark:stroke-sage/40" />
             </g>
 
             <g stroke="url(#networkLine)" strokeWidth="1.4">
@@ -284,24 +284,26 @@ export default function Donate() {
               <circle cx="697" cy="396" r="3" fill="#DCE8DA" fillOpacity=".8" />
             </g>
 
-            <g transform="translate(356 632)">
-              <rect width="188" height="56" rx="28" fill="#F6F4EB" fillOpacity=".08" stroke="#DCE8DA" strokeOpacity=".2" />
-              <circle cx="30" cy="28" r="13" fill="#D97758" fillOpacity=".9" />
-              <path d="M30 34s-7-4.1-7-8.3a3.6 3.6 0 0 1 7-1.2 3.6 3.6 0 0 1 7 1.2C37 29.9 30 34 30 34Z" fill="#FFF6E9" />
-              <text x="54" y="33" fill="#F6F4EB" fontFamily="DM Sans, sans-serif" fontSize="12" letterSpacing="1.1">CARE, CONNECTED</text>
+            <g transform="translate(276 620)">
+              <rect width="348" height="88" rx="28" fill="#164536" fillOpacity=".94" stroke="#DCE8DA" strokeOpacity=".32" />
+              <circle cx="46" cy="44" r="25" fill="#D97758" />
+              <path d="M46 54s-13-7.6-13-15.4a6.7 6.7 0 0 1 13-2.2 6.7 6.7 0 0 1 13 2.2C59 46.4 46 54 46 54Z" fill="#FFF6E9" />
+              <text x="86" y="39" fill="#DCE8DA" fontFamily="DM Sans, sans-serif" fontSize="11" fontWeight="700" letterSpacing="1.8">A GIFT IN MOTION</text>
+              <text x="86" y="59" fill="#FFFFFF" fillOpacity=".88" fontFamily="DM Sans, sans-serif" fontSize="13">Direct support. Real people.</text>
+              <path d="M302 44h20m-7-7 7 7-7 7" stroke="#F2C18C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </g>
           </svg>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#102e26] via-transparent to-[#102e26]/10" />
-          <div className="absolute left-10 top-10 flex items-center gap-3 text-sage/80 xl:left-14 xl:top-14">
+          <div className="absolute inset-0 bg-gradient-to-t from-paper via-paper/35 to-transparent dark:from-gray-950 dark:via-gray-950/30 dark:to-transparent" />
+          <div className="absolute left-10 top-10 flex items-center gap-3 text-leaf/90 dark:text-sage/80 xl:left-14 xl:top-14">
             <span className="h-px w-8 bg-coral/80" />
             <span className="eyebrow">One world. More ways to care.</span>
           </div>
-          <div className="absolute inset-x-0 bottom-0 flex flex-col justify-end p-10 text-white xl:p-14">
-            <p className="eyebrow mb-4 text-sage">A direct act of care</p>
+          <div className="absolute inset-x-0 bottom-0 flex flex-col justify-end p-10 text-forest dark:text-white xl:p-14">
+            <p className="eyebrow mb-4 text-leaf dark:text-sage">A direct act of care</p>
             <h1 className="max-w-xl text-5xl leading-[1.05] xl:text-6xl" data-aos="fade-up">
               Your Gift is the Beginning of Their Story.
             </h1>
-            <p className="mt-4 max-w-lg text-lg leading-relaxed text-white/85" data-aos="fade-up" data-aos-delay="100">
+            <p className="mt-4 max-w-lg text-lg leading-relaxed text-forest/80 dark:text-white/85" data-aos="fade-up" data-aos-delay="100">
               Your contribution goes to the recipient wallet shown here. Review the amount and network carefully before confirming.
             </p>
           </div>
