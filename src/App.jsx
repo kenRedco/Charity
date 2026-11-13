@@ -79,7 +79,25 @@ export default function App() {
     }`;
 
   return (
-    <div className="min-h-screen overflow-x-clip bg-paper dark:bg-gray-950 text-ink dark:text-gray-100 flex flex-col transition-colors duration-300">
+    <div className="site-shell min-h-screen overflow-x-clip bg-paper dark:bg-gray-950 text-ink dark:text-gray-100 flex flex-col transition-colors duration-300">
+      <svg className="site-atmosphere" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g className="site-network-illustration" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M-40 192 130 90l172 94 160-129 148 116 156-91 168 115 151-79 166 100 172-93" />
+          <path d="M-12 447 124 350l178 91 160-128 166 103 151-82 168 104 169-79 181 107 153-84" />
+          <path d="m130 90-6 260m178-166v267m160-396v268m148-152v279m156-370v278m168-163v255m151-334v242m166-142v274" />
+          <path d="M1020 658c45-52 97-76 154-72 41 2 76 21 104 54 28-33 63-52 104-54 57-4 109 20 154 72M1017 660c8 59 51 115 129 168l132 82 132-82c78-53 121-109 129-168" />
+          <path d="M1117 646c-7-31 13-57 43-57 20 0 38 12 50 32 12-20 30-32 50-32 30 0 50 26 43 57-10 43-93 99-93 99s-83-56-93-99Z" />
+          <path d="M1042 675c-30 6-54 21-70 45 39 40 86 65 144 77m352-122c30 6 54 21 70 45-39 40-86 65-144 77" />
+          <circle cx="130" cy="90" r="5" />
+          <circle cx="302" cy="184" r="5" />
+          <circle cx="462" cy="55" r="5" />
+          <circle cx="610" cy="171" r="5" />
+          <circle cx="766" cy="80" r="5" />
+          <circle cx="934" cy="195" r="5" />
+          <circle cx="1085" cy="116" r="5" />
+          <circle cx="1251" cy="216" r="5" />
+        </g>
+      </svg>
       {/* ── Header ── */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out px-4 sm:px-6 py-3 flex justify-between items-center ${

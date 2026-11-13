@@ -84,6 +84,103 @@ h4 {
 	}
 }
 
+html .site-shell {
+	position: relative;
+	isolation: isolate;
+	background-color: #f6f4eb;
+	background-image:
+		radial-gradient(ellipse at 82% 10%, rgb(219 170 76 / 18%), transparent 30rem),
+		radial-gradient(ellipse at 10% 76%, rgb(33 82 125 / 9%), transparent 34rem),
+		repeating-linear-gradient(32deg, transparent 0 118px, rgb(23 58 48 / 2.5%) 119px 120px, transparent 121px 240px),
+		radial-gradient(circle, rgb(22 69 54 / 10%) 1px, transparent 1.5px);
+	background-size: auto, auto, 240px 240px, 42px 42px;
+}
+
+html.dark .site-shell {
+	background-color: #081426;
+	background-image:
+		radial-gradient(ellipse at 82% 10%, rgb(211 161 72 / 14%), transparent 32rem),
+		radial-gradient(ellipse at 10% 78%, rgb(42 89 139 / 16%), transparent 36rem),
+		repeating-linear-gradient(32deg, transparent 0 118px, rgb(223 191 125 / 5%) 119px 120px, transparent 121px 240px),
+		radial-gradient(circle, rgb(223 191 125 / 16%) 1px, transparent 1.5px);
+}
+
+.site-shell::before {
+	position: fixed;
+	z-index: 0;
+	inset: -20%;
+	background:
+		radial-gradient(ellipse at 22% 30%, rgb(241 192 98 / 13%), transparent 28%),
+		radial-gradient(ellipse at 76% 74%, rgb(44 96 151 / 11%), transparent 32%);
+	content: '';
+	pointer-events: none;
+	animation: atmosphere-drift 34s ease-in-out infinite alternate;
+}
+
+.dark .site-shell::before {
+	background:
+		radial-gradient(ellipse at 22% 30%, rgb(241 192 98 / 16%), transparent 28%),
+		radial-gradient(ellipse at 76% 74%, rgb(44 96 151 / 20%), transparent 32%);
+}
+
+.site-atmosphere {
+	position: fixed;
+	z-index: 0;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	color: #a47d35;
+	opacity: 0.14;
+	pointer-events: none;
+}
+
+.dark .site-atmosphere {
+	color: #d7b76e;
+	opacity: 0.12;
+}
+
+.site-network-illustration {
+	stroke-width: 1.2;
+	vector-effect: non-scaling-stroke;
+}
+
+.site-shell > main,
+.site-shell > footer {
+	position: relative;
+	z-index: 1;
+}
+
+.site-shell > main > div:first-child {
+	background-color: transparent !important;
+}
+
+.site-shell > main > div:first-child > section.bg-paper,
+.site-shell > main > div:first-child > section.bg-white,
+.site-shell > main > div:first-child > section.bg-gray-50,
+.site-shell > main > div:first-child > section[class~="dark:bg-gray-950"],
+.site-shell > main > div:first-child > section[class~="dark:bg-gray-900"],
+.site-shell > main > div:first-child > div[class~="bg-paper"] {
+	background-color: transparent !important;
+}
+
+.page-hero {
+	background-color: #0a192d;
+	background-image:
+		radial-gradient(ellipse at 86% 16%, rgb(242 194 104 / 22%), transparent 28rem),
+		linear-gradient(125deg, #081426 0%, #102643 58%, #18385b 100%),
+		repeating-linear-gradient(135deg, transparent 0 24px, rgb(255 255 255 / 3%) 24px 25px);
+}
+
+@keyframes atmosphere-drift {
+	from {
+		transform: translate3d(-1.5%, -1%, 0) scale(1);
+	}
+
+	to {
+		transform: translate3d(1.5%, 1%, 0) scale(1.04);
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	*,
 	*::before,
