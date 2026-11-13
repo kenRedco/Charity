@@ -1,1 +1,0 @@
-import{j as e}from"./app-CY4MHdFO.js";import{a as t}from"./globe-BE3P83Ar.js";function n(){const[r,s]=t.useState(!1);return t.useEffect(()=>{s(!0)},[]),r}function a({children:r,fallback:s}){return n()?e.jsx(e.Fragment,{children:r?.()}):s??null}export{a as C};
