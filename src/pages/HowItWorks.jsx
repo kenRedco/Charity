@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import usePageTitle from '../hooks/usePageTitle';
 import PageMeta from '../components/PageMeta';
 import { Link } from 'react-router-dom';
-import { FiArrowDownCircle, FiCheckSquare, FiShield, FiSend, FiUserCheck } from 'react-icons/fi';
+import { FiArrowDownCircle, FiCheckSquare, FiHeart, FiInfo, FiShield, FiSend, FiTrendingUp, FiUserCheck } from 'react-icons/fi';
 
 const timelineSteps = [
   {
@@ -31,6 +31,159 @@ const timelineSteps = [
     text: 'The family receives the funds and can use them for whatever they deem most important—starting a business, paying school fees, buying medicine, or repairing their home. The power is in their hands.',
   },
 ];
+
+const spendingExamples = [
+  {
+    id: 'programmes',
+    label: 'Charitable programmes',
+    percentage: 85,
+    color: '#668873',
+    icon: FiHeart,
+    description: 'Hypothetical support for charitable programmes and aid delivery. This is an example category, not a record of CryptoCharity disbursements.',
+  },
+  {
+    id: 'administration',
+    label: 'Administration',
+    percentage: 10,
+    color: '#d9aa4c',
+    icon: FiShield,
+    description: 'Hypothetical essential operating costs, such as governance, compliance, financial controls, and recordkeeping. No actual expenses are represented.',
+  },
+  {
+    id: 'fundraising',
+    label: 'Fundraising',
+    percentage: 5,
+    color: '#d97758',
+    icon: FiTrendingUp,
+    description: 'Hypothetical donor outreach and campaign costs. This percentage is illustrative only and is not based on reported fundraising activity.',
+  },
+];
+
+const spendingCircleLength = 2 * Math.PI * 68;
+
+function SpendingAllocation() {
+  const [selectedId, setSelectedId] = useState(spendingExamples[0].id);
+  const selectedExample = spendingExamples.find((item) => item.id === selectedId);
+  let segmentStart = 0;
+
+  return (
+    <section
+      id="spending-breakdown"
+      aria-labelledby="spending-breakdown-title"
+      className="relative overflow-hidden bg-paper py-20 dark:bg-gray-950 sm:py-24"
+    >
+      <div className="relative z-10 mx-auto max-w-6xl px-5 sm:px-6">
+        <div className="mx-auto mb-12 max-w-3xl text-center">
+          <p className="eyebrow mb-4 inline-flex items-center gap-2 rounded-full bg-coral/10 px-4 py-2 text-forest dark:bg-coral/15 dark:text-sage">
+            <FiInfo aria-hidden="true" className="text-coral" />
+            Illustrative example · not verified
+          </p>
+          <h2 id="spending-breakdown-title" className="text-4xl text-forest dark:text-white sm:text-5xl">
+            Where the money could go
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-gray-600 dark:text-gray-300 sm:text-lg">
+            Explore a hypothetical allocation of 100 units. These percentages are made-up examples—not CryptoCharity financial results, audited figures, or a promise about how donations are used.
+          </p>
+        </div>
+
+        <div className="grid items-stretch gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="flex flex-col items-center justify-center rounded-3xl border border-forest/10 bg-white/85 p-6 shadow-[0_20px_60px_rgba(23,58,48,0.08)] backdrop-blur-sm dark:border-white/10 dark:bg-gray-900/85 sm:p-9">
+            <div className="relative h-56 w-56" data-aos="zoom-in">
+              <svg
+                viewBox="0 0 180 180"
+                role="img"
+                aria-label={`Hypothetical spending example: ${spendingExamples.map((item) => `${item.label} ${item.percentage}%`).join(', ')}`}
+                className="h-full w-full -rotate-90"
+              >
+                <circle cx="90" cy="90" r="68" fill="none" stroke="currentColor" strokeWidth="17" className="text-gray-100 dark:text-gray-800" />
+                {spendingExamples.map((item) => {
+                  const offset = (spendingCircleLength * segmentStart) / 100;
+                  segmentStart += item.percentage;
+                  return (
+                    <circle
+                      key={item.id}
+                      cx="90"
+                      cy="90"
+                      r="68"
+                      fill="none"
+                      stroke={item.color}
+                      strokeWidth="17"
+                      strokeDasharray={`${(spendingCircleLength * item.percentage) / 100} ${spendingCircleLength}`}
+                      strokeDashoffset={-offset}
+                      className={`transition-opacity duration-300 ${selectedId === item.id ? 'opacity-100' : 'opacity-60'}`}
+                    />
+                  );
+                })}
+              </svg>
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-4xl font-bold leading-none text-forest dark:text-white">
+                  {selectedExample.percentage}%
+                </span>
+                <span className="mt-2 max-w-28 text-xs font-semibold uppercase leading-snug tracking-wider text-gray-500 dark:text-gray-400">
+                  example share
+                </span>
+              </div>
+            </div>
+            <p className="mt-5 text-center text-sm text-gray-500 dark:text-gray-400">
+              A visual example only—not a financial report.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+              {spendingExamples.map((item) => {
+                const Icon = item.icon;
+                const isSelected = selectedId === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    aria-pressed={isSelected}
+                    aria-controls="spending-example-detail"
+                    onClick={() => setSelectedId(item.id)}
+                    className={`flex min-h-20 items-center gap-3 rounded-2xl border p-4 text-left transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950 ${
+                      isSelected
+                        ? 'border-forest/25 bg-white shadow-md dark:border-white/25 dark:bg-gray-900'
+                        : 'border-forest/10 bg-white/55 hover:bg-white/85 dark:border-white/10 dark:bg-gray-900/45 dark:hover:bg-gray-900/80'
+                    }`}
+                  >
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style={{ color: item.color, backgroundColor: `${item.color}20` }}>
+                      <Icon aria-hidden="true" className="h-5 w-5" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-semibold text-gray-800 dark:text-gray-100 sm:text-base">{item.label}</span>
+                      <span className="mt-0.5 block text-xs text-gray-500 dark:text-gray-400">Illustrative allocation</span>
+                    </span>
+                    <span className="text-2xl font-semibold tabular-nums text-forest dark:text-white">{item.percentage}%</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div
+              id="spending-example-detail"
+              aria-live="polite"
+              aria-atomic="true"
+              className="flex-1 rounded-2xl border border-forest/10 bg-white/75 p-5 dark:border-white/10 dark:bg-gray-900/70 sm:p-6"
+            >
+              <p className="eyebrow mb-2 text-forest dark:text-sage">Example category</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">{selectedExample.label}</h3>
+              <p className="mt-2 leading-relaxed text-gray-600 dark:text-gray-300">{selectedExample.description}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 flex gap-3 rounded-2xl border border-coral/20 bg-coral/5 p-5 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+          <FiInfo aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-coral" />
+          <p>
+            No supporting financial documents are linked for this illustration. Replace these hypothetical percentages with verified figures and source documents before presenting an actual spending breakdown.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
 export default function HowItWorks() {
   usePageTitle('How It Works');
@@ -74,6 +227,8 @@ export default function HowItWorks() {
           </div>
         </div>
       </section>
+
+      <SpendingAllocation />
 
       {/* Final CTA */}
       <section className="bg-gray-50 dark:bg-gray-900 py-20">
