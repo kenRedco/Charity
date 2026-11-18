@@ -120,6 +120,7 @@ export default function App() {
           <NavLink to="/"       className={navLinkClass}>Home</NavLink>
           <NavLink to="/about"  className={navLinkClass}>About</NavLink>
           <NavLink to="/impact" className={navLinkClass}>Impact</NavLink>
+          <NavLink to="/dashboard" className={navLinkClass}>Dashboard</NavLink>
           <NavLink to="/contact"className={navLinkClass}>Contact</NavLink>
         </nav>
 
@@ -193,6 +194,7 @@ export default function App() {
             <NavLink to="/"        onClick={closeMenu} className="text-3xl font-semibold text-white">Home</NavLink>
             <NavLink to="/about"   onClick={closeMenu} className="text-3xl font-semibold text-white">About</NavLink>
             <NavLink to="/impact"  onClick={closeMenu} className="text-3xl font-semibold text-white">Impact</NavLink>
+            <NavLink to="/dashboard" onClick={closeMenu} className="text-3xl font-semibold text-white">Donor Dashboard</NavLink>
             <NavLink to="/contact" onClick={closeMenu} className="text-3xl font-semibold text-white">Contact</NavLink>
             <Link
               to="/donate"

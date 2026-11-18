@@ -16,6 +16,7 @@ export default defineConfig({
       '/process',
       '/privacy',
       '/terms',
+      '/dashboard',
     ],
     // Keep beasties (inline critical CSS) enabled for perf
     beastiesOptions: {},

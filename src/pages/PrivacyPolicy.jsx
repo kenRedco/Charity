@@ -28,6 +28,9 @@ export default function PrivacyPolicy() {
           <p>
             We also automatically collect certain information when you visit, use or navigate the Website. This information does not reveal your specific identity (like your name or contact information) but may include device and usage information, such as your IP address, browser and device characteristics, operating system, language preferences, referring URLs, device name, country, location, and other technical information.
           </p>
+          <p>
+            If you use the donor dashboard, Supabase Auth processes your email address and account identifier for email-link sign-in. For on-site donations submitted while signed in, the dashboard may store the transaction hash, network, amount, recipient, confirmation status, project selection, anonymity preference, and your notification preferences. Dashboard records are restricted to the signed-in account. Donation transactions and wallet addresses are recorded on public blockchains and cannot be made private by CryptoCharity.
+          </p>
           
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-8">2. How Do We Use Your Information?</h2>
           <p>
@@ -37,12 +40,13 @@ export default function PrivacyPolicy() {
             <li>To send you marketing and promotional communications.</li>
             <li>To send administrative information to you.</li>
             <li>To protect our Services.</li>
+            <li>To authenticate dashboard users and display their private donation records and preferences.</li>
             <li>To enforce our terms, conditions and policies for business purposes, to comply with legal and regulatory requirements or in connection with our contract.</li>
           </ul>
 
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-8">3. Will Your Information Be Shared With Anyone?</h2>
           <p>
-            We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations.
+            We use Supabase to provide dashboard authentication and private data storage. We may also share information with service providers or authorities as needed to provide our services, comply with laws, protect rights, or fulfill business obligations. Email notification preferences are stored, but dashboard email alerts are not delivered unless a notification service is configured.
           </p>
 
 

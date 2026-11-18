@@ -18,6 +18,7 @@ const Contact      = lazy(() => import('./pages/Contact'));
 const PrivacyPolicy   = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService  = lazy(() => import('./pages/TermsOfService'));
 const HowItWorks   = lazy(() => import('./pages/HowItWorks'));
+const DonorDashboard = lazy(() => import('./pages/DonorDashboard'));
 
 // ScrollToTop is moved inside App's route so it has router context.
 // We inline it here so vite-react-ssg's RouterProvider wraps it correctly.
@@ -40,6 +41,7 @@ const routes = [
       { path: 'contact',      element: s(Contact) },
       { path: 'privacy',      element: s(PrivacyPolicy) },
       { path: 'terms',        element: s(TermsOfService) },
+      { path: 'dashboard',   element: s(DonorDashboard) },
       { path: 'process',      element: s(HowItWorks) },
     ],
   },

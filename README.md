@@ -102,6 +102,37 @@ Then read them in `src/config.js` with `import.meta.env.VITE_*`.
 | `/process` | How It Works — donation journey |
 | `/privacy` | Privacy Policy |
 | `/terms` | Terms of Service |
+| `/dashboard` | Donor Dashboard — private contribution history and preferences |
+
+---
+
+## Donor dashboard setup
+
+The donor dashboard uses Supabase email magic links, row-level security, and a server-side transaction verifier. It is intentionally unavailable until a Supabase project is configured; it does not fall back to browser-only or sample donor data.
+
+1. Create a Supabase project and apply `supabase/migrations/202611180001_donor_dashboard.sql` in the Supabase SQL Editor (or with the Supabase CLI).
+2. In Supabase Authentication, enable the Email provider, configure production SMTP, and add these allowed redirect URLs:
+   - `https://kenredco.github.io/Charity/dashboard`
+   - `http://localhost:5173/Charity/dashboard`
+3. Copy `.env.example` to `.env.local` and set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` to the project URL and publishable/anon key. These two values are public client configuration; database row-level security protects donor records.
+4. Configure the GitHub repository Actions **Variables** `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` so the Pages build can connect to Supabase.
+5. Before enabling verification, confirm the donation addresses in `src/config.js` are the intended mainnet recipients. Deploy `supabase/functions/verify-donation` and set its server-side secrets:
+
+   ```sh
+   supabase secrets set APP_ALLOWED_ORIGINS="https://kenredco.github.io,http://localhost:5173" \
+     DONATION_ETH_ADDRESS="your-verified-ethereum-address" \
+     DONATION_BTC_ADDRESS="your-verified-bitcoin-address" \
+     DONATION_SOL_ADDRESS="your-verified-solana-address" \
+     DONATION_TRX_ADDRESS="your-verified-tron-address" \
+     DONATION_XRP_ADDRESS="your-verified-xrp-address"
+   supabase functions deploy verify-donation
+   ```
+
+   The Supabase function runtime provides its URL, anon key, and service-role key. Never put the service-role key in Vite variables or browser code. Optional `ETH_RPC_URL`, `SOL_RPC_URL`, `TRON_RPC_URL`, `TRON_API_KEY`, and `XRP_RPC_URL` secrets can be used to configure production RPC providers; public defaults are rate-limited and are not an availability guarantee.
+
+When signed in, the on-site Ethereum, Bitcoin, Solana, and TRON wallet flows submit transaction hashes for verification and private account history. Donations remain available when signed out, but are not added to an account. The server checks that each transfer paid the configured recipient and records its network data; unconfirmed transactions remain pending. This does not cryptographically prove who controls the sending wallet, and no past transactions are imported. The XRP payment URI and QR/copy-to-external-wallet flows leave this site and cannot be associated automatically. Blockchain transactions remain public regardless of the account's anonymous preference.
+
+Donation history and preferences are protected by owner-only RLS policies; only the verification function can create or update donation records. Receipts are downloadable transaction summaries, not tax-deductibility certificates. Project cards appear only after verified donations are linked to projects in the database; no project or financial data is seeded by this repository. Email notification choices are stored privately, but actual notification delivery requires configuring a server-side email sender.
 
 ---
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ClientOnly } from 'vite-react-ssg';
 import usePageTitle from '../hooks/usePageTitle';
 import PageMeta from '../components/PageMeta';
@@ -7,7 +7,8 @@ import { FiCopy, FiCheckCircle, FiHelpCircle, FiExternalLink } from 'react-icons
 import { FaWallet } from 'react-icons/fa';
 import { SiBitcoin, SiEthereum, SiSolana } from 'react-icons/si';
 import { Connection, PublicKey, SystemProgram, Transaction } from '@solana/web3.js';
-import { DONATION_CURRENCIES } from '../config';
+import { DONATION_CURRENCIES, SITE_BASENAME } from '../config';
+import { supabase, supabaseConfigured } from '../lib/supabase';
 
 function TronMark({ className }) {
   return (
@@ -53,6 +54,12 @@ export default function Donate() {
   const [sending, setSending] = useState(false);
   const [transactionHash, setTransactionHash] = useState('');
   const [error, setError] = useState('');
+  const [donationIsAnonymous, setDonationIsAnonymous] = useState(true);
+  const [dashboardNotice, setDashboardNotice] = useState('');
+  const [dashboardCheckFailed, setDashboardCheckFailed] = useState(false);
+  const [retryingDashboardCheck, setRetryingDashboardCheck] = useState(false);
+  const [projects, setProjects] = useState([]);
+  const [selectedProjectId, setSelectedProjectId] = useState('');
 
   const currency = DONATION_CURRENCIES[currencyCode];
   const { Icon: CurrencyIcon, color: currencyColor, background: currencyBackground } = CURRENCY_MARKS[currencyCode];
@@ -67,11 +74,101 @@ export default function Donate() {
   };
   const explorerUrl = explorerUrls[currencyCode];
 
+  useEffect(() => {
+    if (!supabase) return undefined;
+    let active = true;
+    supabase
+      .from('projects')
+      .select('id,name')
+      .eq('is_active', true)
+      .order('name')
+      .then(({ data, error: projectError }) => {
+        if (!active) return;
+        if (projectError) {
+          setDashboardNotice('Project choices are temporarily unavailable. You can still make a general donation.');
+        } else {
+          setProjects(data || []);
+        }
+      })
+      .catch(() => {
+        if (active) setDashboardNotice('Project choices are temporarily unavailable. You can still make a general donation.');
+      });
+    supabase.auth.getSession().then(({ data, error: sessionError }) => {
+      if (!active) return;
+      if (sessionError) {
+        setDashboardNotice('Your saved anonymity preference could not be loaded. This gift will remain anonymous by default.');
+        return;
+      }
+      if (!data.session) return;
+      supabase
+        .from('donor_preferences')
+        .select('anonymous_by_default')
+        .eq('user_id', data.session.user.id)
+        .maybeSingle()
+        .then(({ data: preference, error: preferenceError }) => {
+          if (!active) return;
+          if (preferenceError) {
+            setDashboardNotice('Your saved anonymity preference could not be loaded. This gift will remain anonymous by default.');
+          } else if (preference) {
+            setDonationIsAnonymous(preference.anonymous_by_default);
+          }
+        })
+        .catch(() => {
+          if (active) setDashboardNotice('Your saved anonymity preference could not be loaded. This gift will remain anonymous by default.');
+        });
+    }).catch(() => {
+      if (active) setDashboardNotice('Your saved anonymity preference could not be loaded. This gift will remain anonymous by default.');
+    });
+    return () => { active = false; };
+  }, []);
+
+  const recordDonationForDashboard = async (hash) => {
+    setDashboardCheckFailed(false);
+    if (!supabaseConfigured || !supabase) {
+      setRetryingDashboardCheck(false);
+      setDashboardNotice('Your wallet submitted the transaction. Donor history is not enabled on this site yet.');
+      return;
+    }
+
+    try {
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) throw new Error('Your sign-in session could not be checked.');
+      if (!sessionData.session) {
+        setDashboardNotice('Your donation was sent, but you were signed out. Sign in before a future on-site donation to save it to your private history.');
+        return;
+      }
+
+      const { data, error: verifyError } = await supabase.functions.invoke('verify-donation', {
+        body: {
+          network: currencyCode,
+          txHash: hash,
+          isAnonymous: donationIsAnonymous,
+          projectId: selectedProjectId || null,
+        },
+      });
+      if (verifyError) {
+        setDashboardCheckFailed(true);
+        throw new Error('The transaction was sent, but its private dashboard record could not be saved. You can retry the on-chain check.');
+      }
+      const status = data?.donation?.verification_status;
+      setDashboardNotice(status === 'verified'
+        ? 'On-chain transaction verified and saved to your private dashboard.'
+        : 'Transaction submitted. It will appear as pending until the network confirms it.');
+    } catch (recordError) {
+      setDashboardCheckFailed(true);
+      setDashboardNotice(recordError.message || 'The donation was sent, but its dashboard record could not be saved.');
+    } finally {
+      setRetryingDashboardCheck(false);
+    }
+  };
+
   const handleCurrencyChange = (code) => {
     setCurrencyCode(code);
     setAmount('');
     setError('');
     setTransactionHash('');
+    setDashboardNotice('');
+    setDashboardCheckFailed(false);
   };
 
   const handleCopy = async () => {
@@ -87,6 +184,8 @@ export default function Donate() {
   const handleDonate = async () => {
     setError('');
     setTransactionHash('');
+    setDashboardNotice('');
+    setDashboardCheckFailed(false);
     if (!amountBaseUnits || !amountFitsWalletApi) return;
 
     if (currencyCode === 'XRP') {
@@ -163,6 +262,7 @@ export default function Donate() {
         hash = result.txid || signedTransaction.txID;
       }
       setTransactionHash(hash);
+      void recordDonationForDashboard(hash);
     } catch (sendError) {
       if (sendError.code === 4001 || sendError.code === 'ACTION_REJECTED') {
         setError('The transaction was cancelled in your wallet. No donation was sent.');
@@ -366,6 +466,33 @@ export default function Donate() {
               <p id="amount-help" className="text-xs text-gray-500 dark:text-gray-400 mt-2">Amount is optional. Confirm the currency and network in your wallet before sending.</p>
               {amount && !amountBaseUnits && <p id="amount-error" className="text-sm text-red-700 dark:text-red-300 mt-2" role="alert">Enter a positive {currency.ticker} amount with no more than {currency.decimals} decimal places.</p>}
               {amountBaseUnits && !amountFitsWalletApi && <p id="amount-error" className="text-sm text-red-700 dark:text-red-300 mt-2" role="alert">This amount exceeds the supported range for the selected wallet. Use a smaller amount to avoid rounding.</p>}
+              {projects.length > 0 && (
+                <div className="mt-5">
+                  <label htmlFor="donation-project" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">Project to support (optional)</label>
+                  <select
+                    id="donation-project"
+                    value={selectedProjectId}
+                    onChange={(event) => setSelectedProjectId(event.target.value)}
+                    className="w-full rounded-lg border border-forest/15 bg-paper px-4 py-3 text-ink focus:outline-none focus:ring-2 focus:ring-leaf dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
+                  >
+                    <option value="">General donation</option>
+                    {projects.map((project) => <option key={project.id} value={project.id}>{project.name}</option>)}
+                  </select>
+                  <p className="mt-1 text-xs leading-relaxed text-gray-500 dark:text-gray-400">This records your preference; it does not route funds to a separate wallet or guarantee restricted use.</p>
+                </div>
+              )}
+              <label className="mt-5 flex cursor-pointer items-start gap-3 rounded-xl border border-forest/10 bg-white/70 p-3 text-sm dark:border-white/10 dark:bg-gray-950/50">
+                <input
+                  type="checkbox"
+                  checked={donationIsAnonymous}
+                  onChange={(event) => setDonationIsAnonymous(event.target.checked)}
+                  className="mt-0.5 h-4 w-4 accent-forest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral"
+                />
+                <span>
+                  <span className="block font-semibold text-gray-800 dark:text-gray-100">Mark this gift as anonymous</span>
+                  <span className="mt-0.5 block text-xs leading-relaxed text-gray-500 dark:text-gray-400">Your dashboard is private either way. The site does not publish donor details; the transaction remains public on-chain.</span>
+                </span>
+              </label>
               <button
                 type="button"
                 onClick={handleDonate}
@@ -376,6 +503,25 @@ export default function Donate() {
                 {sending ? 'Check your wallet...' : `Continue with ${currency.name} wallet`}
               </button>
               {error && <p className="mt-4 text-sm text-red-700 dark:text-red-300" role="alert">{error}</p>}
+              {dashboardNotice && (
+                <p className="mt-4 rounded-lg border border-forest/10 bg-forest/5 p-3 text-sm leading-relaxed text-forest dark:border-white/10 dark:bg-white/5 dark:text-gray-200" role="status">
+                  {dashboardNotice}{' '}
+                  {(!supabaseConfigured || dashboardNotice.includes('signed out')) && <a className="font-semibold underline" href={`${SITE_BASENAME}/dashboard`}>Open donor dashboard</a>}
+                  {dashboardCheckFailed && transactionHash && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setRetryingDashboardCheck(true);
+                        void recordDonationForDashboard(transactionHash);
+                      }}
+                      disabled={retryingDashboardCheck}
+                      className="ml-2 font-semibold underline disabled:opacity-50"
+                    >
+                      {retryingDashboardCheck ? 'Checking…' : 'Retry check'}
+                    </button>
+                  )}
+                </p>
+              )}
               {transactionHash && (
                 <div className="mt-4 rounded-md border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950 p-4 text-sm text-green-900 dark:text-green-100" role="status">
                   <p className="font-semibold">Transaction submitted. Thank you.</p>
